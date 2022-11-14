@@ -1,0 +1,76 @@
+<?php
+
+namespace App\Http\Livewire\Palette;
+
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
+use Illuminate\Database\Eloquent\Builder;
+use App\Models\Palette;
+
+class DataTable extends DataTableComponent
+{
+    protected $model = Palette::class;
+
+    public function configure(): void
+    {
+        $this->setPrimaryKey('id');
+    }
+
+    public function columns(): array
+    {
+        return [
+            Column::make('Name')
+                ->label(fn($row) => $row->name)
+                ->searchable(),
+            Column::make('Quantity')
+                ->label(fn($row) => $row->quantity)
+                ->searchable(),
+            Column::make('Batch Carton')
+                ->label(fn($row) => $row->carton->name)
+                ->searchable(),
+            Column::make('Description')
+                ->label(fn($row) => $row->description)
+                ->searchable(),
+            Column::make('Registered date')
+                ->label(fn($row) => $row->created_at)
+                ->searchable(),
+            Column::make('')
+                ->label(
+                    fn($row, Column $column) => "<a href='/palette/$row->id/edit' class='btn btn-primary' role='button'><i class='fa-solid fa-pen-to-square'></i></a>"
+                )->html(),
+            Column::make('')
+                ->label(
+                    function ($row, Column $column) {
+                        $data = [
+                            'id' => $row->id,
+                            'type' => 'palette',
+                            'action' => 'Delete',
+                            'message' => 'Confirm palette '. $row->name . ' deletion?',
+                        ];
+                        $json_data = json_encode($data);
+                        return "<button wire:click='emitEvent($json_data)' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>";
+                    }
+                )->html(),
+            Column::make('')
+                ->label(
+                    fn($row, Column $column) => "<a href='/racking/$row->id' class='btn btn-info' role='button'><i class='fa-solid fa-table-cells'></i></a>"
+                )->html(),
+        ];
+    }
+
+    public function builder(): Builder
+    {
+        
+        return Palette::query()->with('carton');
+    }
+
+    public function emitEvent($data)
+    {
+        $this->dispatchBrowserEvent('open-confirm-modal', $data);
+    }
+
+    public static function getName()
+    {
+        return 'palette.datatable';
+    }
+}
