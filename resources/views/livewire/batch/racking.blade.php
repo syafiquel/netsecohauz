@@ -18,7 +18,7 @@
         @foreach($sections as $key => $section)
             @if( $key == 0 )
             <div class="tab-pane fade show active" id="section{{ $section }}" role="tabpanel">
-                <table id="tbl{{ $section }}" class="rack text-center">
+                <table id="tbl{{ $section }}" class=" responsive rack text-center">
                     <thead>
                         <tr>
                             <td></td>
