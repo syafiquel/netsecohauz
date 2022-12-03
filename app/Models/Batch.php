@@ -12,18 +12,15 @@ class Batch extends Model
     protected $fillable = [
 
         'name',
+        'group_name',
         'description',
         'remark',
-        'palette_id',
         'brand_owner_id',
-        'palette_quantity',
+        'unit_quantity',
+        'manufactured_at',
+        'expired_at',
         'status'
     ];
-
-    public function palette()
-    {
-        return $this->belongsTo(Palette::class);
-    }
 
     public function brand_owner()
     {

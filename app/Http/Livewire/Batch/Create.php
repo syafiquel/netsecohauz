@@ -3,15 +3,17 @@
 namespace App\Http\Livewire\Batch;
 
 use App\Models\Batch;
-use App\Models\Palette;
 use App\Models\BrandOwner;
+use App\Models\Unit;
 use Livewire\Component;
+use Illuminate\Support\Carbon;
 
 class Create extends Component
 {
 
-    public $name, $palette_quantity, $description, $remark, $palettes, $palette, $selected_palette, $brand_owner, $brand_owners, $selected_brand_owner;
+    public $name, $unit_quantity, $description, $remark, $brand_owners, $brand_owner, $selected_brand_owner;
     public $selected_status, $status, $selecteds;
+    public $total_unit_quantity, $batch_unit_quantity, $expired_date, $manufactured_date;
     protected $listeners = [ 'dynamic-select' => 'dynamicHandler' ];
 
     public $statuses = [
@@ -29,7 +31,6 @@ class Create extends Component
 
     public function mount()
     {
-        $this->palettes = Palette::all();
         $this->brand_owners = BrandOwner::all();
         $this->selecteds = array();
     }
@@ -45,20 +46,59 @@ class Create extends Component
     public function store()
     {
         $this->validate();
+        $counter = 0;
+        $this->manufactured_date = Carbon::createFromFormat('d-m-Y', $this->manufactured_date)->toDateString();
+        $this->expired_date = Carbon::createFromFormat('d-m-Y', $this->expired_date)->toDateString();
 
-        foreach($this->selecteds as $select)
+
+        while(($this->total_unit_quantity - $this->batch_unit_quantity > 0) || ($this->total_unit_quantity > 0))
         {
-            $user = Batch::create([
+            $this->total_unit_quantity = $this->total_unit_quantity - $this->batch_unit_quantity;
 
-                'name' => $this->name,
-                'palette_quantity' => $this->palette_quantity,
+            if($this->total_unit_quantity != $this->batch_unit_quantity)
+            {
+                $counter++;
+                $this->name_join = $this->name . '#' . $counter;
+            }
+
+            $this->unit_quantity = $this->batch_unit_quantity;
+
+            if($this->total_unit_quantity < 0)
+                $this->unit_quantity = $this->total_unit_quantity + $this->unit_quantity;
+
+            $batch = Batch::create([
+                'name' => $this->name_join,
+                'group_name' => $this->name,
+                'unit_quantity' => $this->unit_quantity,
                 'status' => $this->status,
                 'description' => $this->description,
+                'manufactured_at' => $this->manufactured_date,
+                'expired_at' => $this->expired_date,
                 'remark' => $this->remark,
-                'palette_id' => intval($select),
-                'brand_owner_id' => BrandOwner::where('name', $this->brand_owner)->first()->id,
+                'brand_owner_id' => $this->brand_owner,
             ]);
+
+            $unit = Unit::create([
+                'name' => $this->name_join . ' unit',
+                'quantity' => $this->unit_quantity,
+                'batch_id' => $batch->id,
+            ]);
+
         }
+
+        // foreach($this->selecteds as $select)
+        // {
+        //     foreach($)
+        //     $user = Batch::create([
+
+        //         'name' => $this->name,
+        //         'unit_quantity' => $this->unit_quantity,
+        //         'status' => $this->status,
+        //         'description' => $this->description,
+        //         'remark' => $this->remark,
+        //         'brand_owner_id' => $brand_owner->id,
+        //     ]);
+        // }
         
 
         $this->emit('flash.message', ['info' => 'Batch is Created Successfully']);
@@ -66,6 +106,18 @@ class Create extends Component
         $this->emit('refreshDatatable');
 
     }
+
+    // public function updatedManufacturedDate()
+    // {
+        
+    //     dd($this->manufactured_date = Carbon::createFromFormat('d-m-Y', $this->manufactured_date)->toDateString());
+    // }
+
+    // public function updatedExpiredDate()
+    // {
+        
+    //     dd($this->expired_date = Carbon::createFromFormat('d-m-Y', $this->expired_date)->toDateString());
+    // }
 
     public function render()
     {

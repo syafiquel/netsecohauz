@@ -8,25 +8,31 @@
                 <label for="name">Name</label>
                 <input id="name" type="text" class="form-control" name="name" autofocus wire:model="name">
             </div>
-            <div class="form-group col-6">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email" wire:model="email">
-                    <div class="invalid-feedback"></div>
-            </div>
         </div>
 
         <div class="form-group">
             <div class="row">
                 <div class="form-group col-6">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" class="form-control" name="email" wire:model="email">
+                    <div class="invalid-feedback"></div>
+                </div>
+                <div class="form-group col-6">
                     <label for="phone">Phone</label>
                     <input id="phone" type="text" class="form-control" name="phone" wire:model="phone">
                     <div class="invalid-feedback"></div>
                 </div>
-                <div class="form-group col-6">
-                    <label>Website</label>
-                    <input id="website" type="text" class="form-control" name="website" wire:model="website">
-                    <div class="invalid-feedback"></div>
-                </div>
+            </div>
+        </div>
+
+        <div class="form-divider">
+            Company
+        </div>
+        <div class="row">
+            <div class="form-group col-6">
+            <label>Website</label>
+                <input id="website" type="text" class="form-control" name="website" wire:model="website">
+                <div class="invalid-feedback"></div>
             </div>
         </div>
 

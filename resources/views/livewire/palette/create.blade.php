@@ -24,7 +24,7 @@
 
 
                     <div class="form-group">
-                        <label>Quantity</label>
+                        <label>Palette per Batch Quantity</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-envelope"></i></div>
@@ -34,17 +34,17 @@
                         </div>
                     </div>
 
-                    <!-- <div class="form-group">
-                        <label>Batch Carton</label>        
-                        <select wire:model="carton" class="form-control selectric">
-                            <option value="">Select a batch carton</option>
-                            @foreach($cartons as $carton)
-                            <option value="{{ $carton->id }}">{{ ucfirst($carton->name) }}</option>
+                    <div class="form-group">
+                        <label>Batch</label>        
+                        <select wire:model="batch" class="form-control selectric">
+                            <option value="">Select a batch</option>
+                            @foreach($batches as $batch)
+                            <option value="{{ $batch->id }}">{{ ucfirst($batch->group_name) }}</option>
                             @endforeach
                         </select>
-                    </div> -->
+                    </div>
 
-                    @livewire('dynamic-input', ['model' => 'carton', 'label' => 'Batch Carton'])
+                    {{-- @livewire('dynamic-input', ['model' => 'carton', 'label' => 'Batch Carton']) --}}
 
                     <div class="form-group">
                         <label>Description</label>

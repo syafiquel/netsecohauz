@@ -14,7 +14,7 @@ class CreatePalettesRelationTable extends Migration
     public function up()
     {
         Schema::table('palettes', function (Blueprint $table) {
-            $table->foreign('carton_id')->references('id')->on('cartons')->onDelete('cascade');
+            $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
         });
     }
 

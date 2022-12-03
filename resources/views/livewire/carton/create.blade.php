@@ -24,27 +24,27 @@
 
 
                     <div class="form-group">
-                        <label>Quantity</label>
+                        <label>Carton per Batch Quantity</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-envelope"></i></div>
                             </div>
-                            <input type="number" class="form-control" placeholder="Batch Carton Quantity" name="quantity" wire:model="quantity">
+                            <input type="number" class="form-control" placeholder="Carton per Batch Quantity" name="quantity" wire:model="quantity">
                             @error('quantity') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
-                    <!-- <div class="form-group">
-                        <label>Batch Bundle</label>        
-                        <select wire:model="bundle" class="form-control selectric">
-                            <option value="">Select a batch bundle</option>
-                            @foreach($bundles as $bundle)
-                            <option value="{{ $bundle->id }}">{{ ucfirst($bundle->name) }}</option>
+                    <div class="form-group">
+                        <label>Batch</label>        
+                        <select wire:model="batch" class="form-control selectric">
+                            <option value="">Select a batch</option>
+                            @foreach($batches as $batch)
+                            <option value="{{ $batch->id }}">{{ ucfirst($batch->group_name) }}</option>
                             @endforeach
                         </select>
-                    </div> -->
+                    </div>
 
-                    @livewire('dynamic-input', ['model' => 'bundle', 'label' => 'Batch bundle'])
+                    {{-- @livewire('dynamic-input', ['model' => 'bundle', 'label' => 'Batch bundle']) --}}
 
                     <div class="form-group">
                         <label>Description</label>

@@ -14,12 +14,12 @@ class Palette extends Model
         'name',
         'description',
         'remark',
-        'carton_id',
+        'batch_id',
         'quantity'
     ];
 
-    public function carton()
+    public function batch()
     {
-        return $this->belongsTo(Carton::class);
+        return $this->belongsTo(Batch::class);
     }
 }

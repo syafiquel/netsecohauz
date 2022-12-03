@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Carton;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Illuminate\Database\Eloquent\Builder;
+use App\Models\Bundle;
 use App\Models\Carton;
 
 class DataTable extends DataTableComponent
@@ -22,11 +23,19 @@ class DataTable extends DataTableComponent
             Column::make('Name')
                 ->label(fn($row) => $row->name)
                 ->searchable(),
-            Column::make('Quantity')
+            Column::make('Carton /  Batch')
                 ->label(fn($row) => $row->quantity)
                 ->searchable(),
-            Column::make('Bundle Unit')
-                ->label(fn($row) => $row->bundle->name)
+            Bundle::where('batch_id', 1)->exists() ? 
+            Column::make('Bundle /  Carton')
+                ->label(fn($row) => ($row->batch->unit_quantity / $row->quantity) / ($row->batch->unit_quantity / Bundle::where('batch_id', 1)->first()->quantity))
+                ->searchable() : ''
+            ,
+            Column::make('Unit / Carton')
+                ->label(fn($row) => $row->batch->unit_quantity / $row->quantity)
+                ->searchable(),
+            Column::make('Batch')
+                ->label(fn($row) => $row->batch->name)
                 ->searchable(),
             Column::make('Description')
                 ->label(fn($row) => $row->description)
@@ -56,8 +65,7 @@ class DataTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        
-        return Carton::query()->with('bundle');
+        return Carton::query()->with('batch');
     }
 
     public function emitEvent($data)

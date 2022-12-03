@@ -14,12 +14,12 @@ class Carton extends Model
         'name',
         'description',
         'remark',
-        'bundle_id',
+        'batch_id',
         'quantity'
     ];
 
-    public function bundle()
+    public function batch()
     {
-        return $this->belongsTo(Bundle::class);
+        return $this->belongsTo(Batch::class);
     }
 }

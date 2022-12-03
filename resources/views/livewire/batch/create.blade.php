@@ -24,35 +24,22 @@
 
 
                     <div class="form-group">
-                        <label>Palette Quantity</label>
+                        <label>Total Units Quantity</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-envelope"></i></div>
                             </div>
-                            <input type="number" class="form-control" placeholder="Batch Quantity" name="palette_quantity" wire:model="palette_quantity">
-                            @error('palette_quantity') <span class="error">{{ $message }}</span> @enderror
+                            <input type="number" class="form-control" placeholder="Total Unit Quantity" name="total_unit_quantity" wire:model="total_unit_quantity">
+                            @error('total_unit_quantity') <span class="error">{{ $message }}</span> @enderror
                         </div>
-                    </div>
-
-                    <!-- <div class="form-group">
-                        <label>Batch Palette</label>        
-                        <select wire:model="palette" class="form-control selectric">
-                            <option value="">Select a batch palette</option>
-                            @foreach($palettes as $palette)
-                            <option value="{{ $palette->id }}">{{ ucfirst($palette->name) }}</option>
-                            @endforeach
-                        </select>
-                    </div> -->
-                    @livewire('dynamic-input', ['model' => 'palette', 'label' => 'Batch Palette'])
-
-                    <div class="form-group">
-                        <label>Batch Status</label>        
-                        <select wire:model="status" class="form-control selectric">
-                            <option value="">Select a batch status</option>
-                            @foreach($statuses as $status)
-                            <option value="{{ $status }}">{{ ucfirst($status) }}</option>
-                            @endforeach
-                        </select>
+                        <label>Units per Batch Quantity</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-envelope"></i></div>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Units per Batch Quantity" name="batch_unit_quantity" wire:model="batch_unit_quantity">
+                            @error('batch_unit_quantity') <span class="error">{{ $message }}</span> @enderror
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -60,7 +47,44 @@
                         <select wire:model="brand_owner" class="form-control selectric">
                             <option value="">Select a brand owner</option>
                             @foreach($brand_owners as $brand_owner)
-                            <option value="{{ $brand_owner->name }}">{{ ucfirst($brand_owner->name) }}</option>
+                            <option value="{{ $brand_owner->id }}">{{ ucfirst($brand_owner->name) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    {{-- @livewire('dynamic-input', ['model' => 'palette', 'label' => 'Batch Palette']) --}}
+
+                    <x-date-picker x-init="if ($('.datepicker-manufactured').length) {
+                        $('.datepicker-manufactured').daterangepicker({
+                                locale: {
+                                format: 'DD-MM-YYYY'
+                            },
+                            singleDatePicker: true
+                            }, function(start, end, label){
+                                $wire.set('manufactured_date', start.format('DD-MM-YYYY'));
+                            });
+                        }" wire:model.defer="manufactured_date" id="manufactured_date" autocomplete="off" class="form-control datepicker-manufactured">
+                        <label>Manufactured Date</label>
+                    </x-date-picker>
+
+                    <x-date-picker x-init="if ($('.datepicker-expired').length) {
+                        $('.datepicker-expired').daterangepicker({
+                                locale: {
+                                format: 'DD-MM-YYYY'
+                            },
+                            singleDatePicker: true
+                            }, function(start, end, label){
+                                $wire.set('expired_date', start.format('DD-MM-YYYY'));
+                            });
+                        }" wire:model.defer="expired_date" id="expired_date" autocomplete="off" class="form-control datepicker-expired">
+                    <label>Expired Date</label>
+                    </x-date-picker>
+
+                    <div class="form-group">
+                        <label>Batch Status</label>        
+                        <select wire:model="status" class="form-control selectric">
+                            <option value="">Select a batch status</option>
+                            @foreach($statuses as $status)
+                            <option value="{{ $status }}">{{ ucfirst($status) }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -95,6 +119,8 @@
         </div>
     </div>
 </div>
+
+
 @push('page_script')
 <script type="text/javascript">
 
@@ -119,8 +145,6 @@
     window.addEventListener('init-dropdown', event => {
         constructDropDown(event.detail.data);
     });
-
-
     
 </script>
 @endpush

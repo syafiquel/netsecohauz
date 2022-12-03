@@ -15,7 +15,7 @@ class CreateCartonsTable extends Migration
     {
         Schema::create('cartons', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('bundle_id')->unsigned()->index()->nullable();
+            $table->bigInteger('batch_id')->unsigned()->index()->nullable();
             $table->string('name');
             $table->integer('quantity');
             $table->string('description');

@@ -38,6 +38,8 @@
         }
     </style>
 
+    @stack('page_style')
+
 </head>
 <body>
     <div id="app">

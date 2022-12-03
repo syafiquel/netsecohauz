@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCartonsRelationTable extends Migration
+class CreateUnitsTableRelation extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCartonsRelationTable extends Migration
      */
     public function up()
     {
-        Schema::table('cartons', function (Blueprint $table) {
+        Schema::table('units', function (Blueprint $table) {
             $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
         });
     }
@@ -25,6 +25,6 @@ class CreateCartonsRelationTable extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('cartons_relation');
+        Schema::dropIfExists('units');
     }
 }

@@ -17,9 +17,12 @@ class CreateBatchesTable extends Migration
             $table->id();
             $table->bigInteger('palette_id')->unsigned()->index()->nullable();
             $table->bigInteger('brand_owner_id')->unsigned()->index()->nullable();
+            $table->string('group_name');
             $table->string('name');
-            $table->integer('palette_quantity');
+            $table->integer('unit_quantity');
             $table->string('status');
+            $table->date('manufactured_at');
+            $table->date('expired_at');
             $table->string('description');
             $table->string('remark');
             $table->timestamps();

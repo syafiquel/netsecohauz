@@ -15,7 +15,7 @@ class CreatePalettesTable extends Migration
     {
         Schema::create('palettes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('carton_id')->unsigned()->index()->nullable();
+            $table->bigInteger('batch_id')->unsigned()->index()->nullable();
             $table->string('name');
             $table->integer('quantity');
             $table->string('description');

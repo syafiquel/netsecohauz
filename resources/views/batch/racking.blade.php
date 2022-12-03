@@ -49,10 +49,6 @@
         border-spacing: 3em;
         border-collapse: separate;
     }
-
-    .tab-content {
-        overflow-x:auto;
-    }
     </style>
     @endpush
 

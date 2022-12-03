@@ -7,6 +7,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Batch;
 
+
 class DataTable extends DataTableComponent
 {
     protected $model = Batch::class;
@@ -22,17 +23,20 @@ class DataTable extends DataTableComponent
             Column::make('Name')
                 ->label(fn($row) => $row->name)
                 ->searchable(),
-            Column::make('Palette Quantity')
-                ->label(fn($row) => $row->palette_quantity)
-                ->searchable(),
-            Column::make('Palette')
-                ->label(fn($row) => $row->palette->name)
+            Column::make('Units Quantity')
+                ->label(fn($row) => $row->unit_quantity)
                 ->searchable(),
             Column::make('Brand Owner')
                 ->label(fn($row) => $row->brand_owner->name)
                 ->searchable(),
             Column::make('Status')
                 ->label(fn($row) => $row->status)
+                ->searchable(),
+            Column::make('Manufactured Date')
+                ->label(fn($row) => $row->manufactured_at)
+                ->searchable(),
+            Column::make('Expired Date')
+                ->label(fn($row) => $row->expired_at)
                 ->searchable(),
             Column::make('Description')
                 ->label(fn($row) => $row->description)
@@ -55,7 +59,7 @@ class DataTable extends DataTableComponent
     public function builder(): Builder
     {
         
-        return Batch::query()->with(['palette', 'brand_owner']);
+        return Batch::query()->with('brand_owner');
     }
 
     public function emitEvent()

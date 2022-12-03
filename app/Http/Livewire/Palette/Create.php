@@ -3,13 +3,13 @@
 namespace App\Http\Livewire\Palette;
 
 use App\Models\Palette;
-use App\Models\Carton;
+use App\Models\Batch;
 use Livewire\Component;
 
 class Create extends Component
 {
 
-    public $name, $quantity, $description, $remark, $cartons, $carton, $selected_carton;
+    public $name, $quantity, $description, $remark, $batches, $batch, $selected_batch;
     public $selecteds;
     protected $listeners = [ 'dynamic-select' => 'dynamicHandler' ];
 
@@ -21,7 +21,7 @@ class Create extends Component
 
     public function mount()
     {
-        $this->cartons = Carton::all();
+        $this->batches = Batch::all()->unique('group_name');
         $this->selecteds = array();
     }
 
@@ -36,17 +36,34 @@ class Create extends Component
     public function store()
     {
         $this->validate();
-        foreach($this->selecteds as $select)
-        {
-            $user = Palette::create([
 
-                'name' => $this->name,
-                'quantity' => $this->quantity,
-                'description' => $this->description,
-                'remark' => $this->remark,
-                'carton_id' => intval($select)
-            ]);
+        $this->batch = Batch::find($this->batch)->first();
+        $batches = Batch::where('group_name', $this->batch->group_name)->get();
+        foreach($batches as $batch)
+        {
+            foreach(range(1, $this->quantity) as $item)
+            {
+                $palette = Palette::create([    
+                    'name' => $this->name . '#' . $item,
+                    'quantity' => $this->quantity,
+                    'description' => $this->description,
+                    'remark' => $this->remark,
+                    'batch_id' => $batch->id,
+                ]);
+            }
         }
+
+        // foreach($this->selecteds as $select)
+        // {
+        //     $user = Palette::create([
+
+        //         'name' => $this->name,
+        //         'quantity' => $this->quantity,
+        //         'description' => $this->description,
+        //         'remark' => $this->remark,
+        //         'carton_id' => intval($select)
+        //     ]);
+        // }
 
         $this->emit('flash.message', ['info' => 'Batch Palette is Created Successfully']);
         $this->emit('userStore');

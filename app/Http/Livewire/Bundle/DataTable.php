@@ -22,11 +22,14 @@ class DataTable extends DataTableComponent
             Column::make('Name')
                 ->label(fn($row) => $row->name)
                 ->searchable(),
-            Column::make('Quantity')
+            Column::make('Bundle / Batch')
                 ->label(fn($row) => $row->quantity)
                 ->searchable(),
-            Column::make('Batch Unit')
-                ->label(fn($row) => $row->unit->name)
+            Column::make('Unit / Bundle')
+                ->label(fn($row) => $row->batch->unit_quantity / $row->quantity)
+                ->searchable(),
+            Column::make('Batch')
+                ->label(fn($row) => $row->batch->name)
                 ->searchable(),
             Column::make('Description')
                 ->label(fn($row) => $row->description)
@@ -57,7 +60,7 @@ class DataTable extends DataTableComponent
     public function builder(): Builder
     {
         
-        return Bundle::query()->with('unit');
+        return Bundle::query()->with('batch');
     }
 
     public function emitEvent($data)

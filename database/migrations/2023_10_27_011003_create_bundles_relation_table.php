@@ -14,7 +14,7 @@ class CreateBundlesRelationTable extends Migration
     public function up()
     {
         Schema::table('bundles', function (Blueprint $table) {
-            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
+            $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
         });
     }
 

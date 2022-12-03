@@ -24,27 +24,27 @@
 
 
                     <div class="form-group">
-                        <label>Quantity</label>
+                        <label>Bundle per Batch Quantity</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-envelope"></i></div>
                             </div>
-                            <input type="number" class="form-control" placeholder="Batch Bundle Quantity" name="quantity" wire:model="quantity">
+                            <input type="number" class="form-control" placeholder="Bundle per Batch Quantity" name="quantity" wire:model="quantity">
                             @error('quantity') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
-                    <!-- <div class="form-group">
-                        <label>Batch Unit</label>        
-                        <select wire:model="unit" class="form-control selectric">
-                            <option value="">Select a batch unit</option>
-                            @foreach($units as $unit)
-                            <option value="{{ $unit->id }}">{{ ucfirst($unit->name) }}</option>
+                    <div class="form-group">
+                        <label>Batch</label>        
+                        <select wire:model="batch" class="form-control selectric">
+                            <option value="">Select a batch</option>
+                            @foreach($batches as $batch)
+                            <option value="{{ $batch->id }}">{{ ucfirst($batch->group_name) }}</option>
                             @endforeach
                         </select>
-                    </div> -->
+                    </div>
 
-                    @livewire('dynamic-input', ['model' => 'unit', 'label' => 'Batch unit'])
+                    {{-- @livewire('dynamic-input', ['model' => 'unit', 'label' => 'Batch unit']) --}}
 
                     <div class="form-group">
                         <label>Description</label>

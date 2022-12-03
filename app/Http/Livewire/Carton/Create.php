@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire\Carton;
 
-use App\Models\Bundle;
+use App\Models\Batch;
 use App\Models\Carton;
 use Livewire\Component;
 
 class Create extends Component
 {
 
-    public $name, $quantity, $description, $remark, $bundles, $bundle, $selected_bundle;
+    public $name, $quantity, $description, $remark, $batches, $batch, $selected_batch;
     public $selecteds;
     protected $listeners = [ 'dynamic-select' => 'dynamicHandler' ];
 
@@ -29,24 +29,41 @@ class Create extends Component
 
     public function mount()
     {
-        $this->bundles = Bundle::all();
+        $this->batches = Batch::all()->unique('group_name');
         $this->selecteds = array();
     }
 
     public function store()
     {
         $this->validate();
-        foreach($this->selecteds as $select)
-        {
-            $user = Carton::create([
 
-                'name' => $this->name,
-                'quantity' => $this->quantity,
-                'description' => $this->description,
-                'remark' => $this->remark,
-                'bundle_id' => intval($select)
-            ]);
+        $this->batch = Batch::find($this->batch)->first();
+        $batches = Batch::where('group_name', $this->batch->group_name)->get();
+        foreach($batches as $batch)
+        {
+            foreach(range(1, $this->quantity) as $item)
+            {
+                $carton = Carton::create([
+                    'name' => $this->name . '#' . $item,
+                    'batch_id' => $batch->id,
+                    'quantity' => $this->quantity,
+                    'description' => $this->description,
+                    'remark' => $this->remark,
+                ]);
+            }
         }
+
+        // foreach($this->selecteds as $select)
+        // {
+        //     $user = Carton::create([
+
+        //         'name' => $this->name,
+        //         'quantity' => $this->quantity,
+        //         'description' => $this->description,
+        //         'remark' => $this->remark,
+        //         'bundle_id' => intval($select)
+        //     ]);
+        // }
         
 
         $this->emit('flash.message', ['info' => 'Batch Carton is Created Successfully']);

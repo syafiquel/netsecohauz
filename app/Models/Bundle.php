@@ -14,12 +14,12 @@ class Bundle extends Model
         'name',
         'description',
         'remark',
-        'unit_id',
+        'batch_id',
         'quantity'
     ];
 
-    public function unit()
+    public function batch()
     {
-        return $this->belongsTo(Unit::class);
+        return $this->belongsTo(Batch::class);
     }
 }

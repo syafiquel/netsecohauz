@@ -15,10 +15,11 @@ class CreateUnitsTable extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('batch_id')->unsigned()->index()->nullable();
             $table->string('name');
             $table->integer('quantity');
-            $table->string('description');
-            $table->string('remark');
+            $table->string('description')->nullable();
+            $table->string('remark')->nullable();
             $table->timestamps();
         });
     }

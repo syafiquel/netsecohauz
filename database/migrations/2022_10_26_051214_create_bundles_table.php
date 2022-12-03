@@ -15,7 +15,7 @@ class CreateBundlesTable extends Migration
     {
         Schema::create('bundles', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('unit_id')->unsigned()->index()->nullable();
+            $table->bigInteger('batch_id')->unsigned()->index()->nullable();
             $table->string('name');
             $table->integer('quantity');
             $table->string('description');
