@@ -60,6 +60,10 @@ class DataTable extends DataTableComponent
                         return "<button wire:click='emitEvent($json_data)' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>";
                     }
                 )->html(),
+            Column::make('')
+                ->label(
+                    fn($row, Column $column) => "<button class='btn btn-info' wire:click='emitQrCodeEvent()'><i class='fa fa-qrcode'></i></a>"
+                )->html(),
         ];
     }
 
@@ -71,6 +75,11 @@ class DataTable extends DataTableComponent
     public function emitEvent($data)
     {
         $this->dispatchBrowserEvent('open-confirm-modal', $data);
+    }
+
+    public function emitQrCodeEvent()
+    {
+        $this->dispatchBrowserEvent('open-qr-code-modal');
     }
 
     public static function getName()

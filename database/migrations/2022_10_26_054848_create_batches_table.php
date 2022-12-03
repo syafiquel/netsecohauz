@@ -15,6 +15,7 @@ class CreateBatchesTable extends Migration
     {
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->bigInteger('palette_id')->unsigned()->index()->nullable();
             $table->bigInteger('brand_owner_id')->unsigned()->index()->nullable();
             $table->string('group_name');

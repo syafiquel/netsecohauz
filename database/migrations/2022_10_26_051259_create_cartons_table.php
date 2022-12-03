@@ -15,6 +15,7 @@ class CreateCartonsTable extends Migration
     {
         Schema::create('cartons', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->bigInteger('batch_id')->unsigned()->index()->nullable();
             $table->string('name');
             $table->integer('quantity');
