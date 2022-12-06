@@ -20,28 +20,46 @@ class ConfirmationModal extends Component
         switch( $data['type'] )
         {
             case 'user':
-                $user = User::find($data['id']);
-                $user->delete();
+                if(User::find($data['id'])->exists())
+                {
+                    $user = User::find($data['id']);
+                    $user->delete();
+                }
                 break;
             case 'product':
-                $product = Product::find($data['id']);
-                $product->delete();
+                if(Product::find($data['id'])->exists())
+                {
+                    $product = Product::find($data['id']);
+                    $product->delete();
+                }
                 break;
             case 'unit':
-                $unit = Unit::find($data['id']);
-                $unit->delete();
+                if(Unit::find($data['id'])->exists())
+                {
+                    $unit = Unit::find($data['id']);
+                    $unit->delete();
+                }
                 break;
             case 'bundle':
-                $bundle = Bundle::find($data['id']);
-                $bundle->delete();
+                if(Bundle::find($data['id'])->exists())
+                {
+                    $bundle = Bundle::find($data['id']);
+                    $bundle->delete();
+                }
                 break;
             case 'carton':
-                $carton = Carton::find($data['id']);
-                $carton->delete();
+                if(Carton::find($data['id'])->exists())
+                {
+                    $carton = Carton::find($data['id']);
+                    $carton->delete();
+                }
                 break;
             case 'palette':
-                $palette = Palette::find($data['id']);
-                $palette->delete();
+                if(Palette::find($data['id']))
+                {
+                    $palette = Palette::find($data['id']);
+                    $palette->delete();
+                }
                 break;
             default:
                 break;

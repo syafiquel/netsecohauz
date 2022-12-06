@@ -17,17 +17,19 @@
         </div>
     </div>
 </div>
-@push('page_script')
-<script type="text/javascript">
-    window.addEventListener('open-confirm-modal', event => {
-        $('div > p').text(event.detail.message);
-        $('#modal-confirm').modal('show');
-        $('#btn').click(function() {
-            var param = {};
-            param.type = event.detail.type;
-            param.id = event.detail.id;
-            window.livewire.emit('delete-event', param);
+@once
+    @push('page_script')
+    <script type="text/javascript">
+        window.addEventListener('open-confirm-modal', event => {
+            $('div > p').text(event.detail.message);
+            $('#modal-confirm').modal('show');
+            $('#btn').click(function() {
+                var param = {};
+                param.type = event.detail.type;
+                param.id = event.detail.id;
+                window.livewire.emit('delete-event', param);
+            });
         });
-    });
-</script>
-@endpush
+    </script>
+    @endpush
+@endonce
