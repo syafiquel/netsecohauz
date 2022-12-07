@@ -27,8 +27,6 @@
     </div>
     
 @push('lib_style')
-
-<link rel="stylesheet" href="{{ asset('css/daterangepicker.css') }}">
 <style>
     @media screen {
 
@@ -64,7 +62,6 @@
 @push('page_script')
 
 <script type="text/javascript" src="{{ asset('js/qrcode.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/daterangepicker.js') }}"></script>
 <script type="text/javascript">
     
     window.addEventListener('open-qr-code-modal', event => {

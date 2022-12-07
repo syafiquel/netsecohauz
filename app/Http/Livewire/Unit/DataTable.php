@@ -25,9 +25,9 @@ class DataTable extends DataTableComponent
             Column::make('Quantity')
                 ->label(fn($row) => $row->quantity)
                 ->searchable(),
-            // Column::make('Brand Owner')
-            //     ->label(fn($row) => $row->brand_owner->user->name)
-            //     ->searchable(),
+            Column::make('Batch')
+                ->label(fn($row) => $row->batch->name)
+                ->searchable(),
             Column::make('Description')
                 ->label(fn($row) => $row->description)
                 ->searchable(),
@@ -57,7 +57,7 @@ class DataTable extends DataTableComponent
     public function builder(): Builder
     {
         
-        return Unit::query()->with('brand_owner');
+        return Unit::query()->with('batch');
     }
 
     public function emitEvent($data)

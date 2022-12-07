@@ -53,32 +53,6 @@
                     </div>
                     {{-- @livewire('dynamic-input', ['model' => 'palette', 'label' => 'Batch Palette']) --}}
 
-                    <x-date-picker x-init="if ($('.datepicker-manufactured').length) {
-                        $('.datepicker-manufactured').daterangepicker({
-                                locale: {
-                                format: 'DD-MM-YYYY'
-                            },
-                            singleDatePicker: true
-                            }, function(start, end, label){
-                                $wire.set('manufactured_date', start.format('DD-MM-YYYY'));
-                            });
-                        }" wire:model.defer="manufactured_date" id="manufactured_date" autocomplete="off" class="form-control datepicker-manufactured">
-                        <label>Manufactured Date</label>
-                    </x-date-picker>
-
-                    <x-date-picker x-init="if ($('.datepicker-expired').length) {
-                        $('.datepicker-expired').daterangepicker({
-                                locale: {
-                                format: 'DD-MM-YYYY'
-                            },
-                            singleDatePicker: true
-                            }, function(start, end, label){
-                                $wire.set('expired_date', start.format('DD-MM-YYYY'));
-                            });
-                        }" wire:model.defer="expired_date" id="expired_date" autocomplete="off" class="form-control datepicker-expired">
-                    <label>Expired Date</label>
-                    </x-date-picker>
-
                     <div class="form-group">
                         <label>Batch Status</label>        
                         <select wire:model="status" class="form-control selectric">
@@ -119,7 +93,6 @@
         </div>
     </div>
 </div>
-
 
 @push('page_script')
 <script type="text/javascript">

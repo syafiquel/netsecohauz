@@ -14,12 +14,12 @@ class Unit extends Model
         'name',
         'description',
         'remark',
-        'brand_owner_id',
+        'batch_id',
         'quantity'
     ];
 
-    public function brand_owner()
+    public function batch()
     {
-        return $this->belongsTo(BrandOwner::class);
+        return $this->belongsTo(Batch::class);
     }
 }

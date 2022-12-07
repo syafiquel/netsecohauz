@@ -6,14 +6,13 @@ use App\Models\Batch;
 use App\Models\BrandOwner;
 use App\Models\Unit;
 use Livewire\Component;
-use Illuminate\Support\Carbon;
 
 class Create extends Component
 {
 
     public $name, $unit_quantity, $description, $remark, $brand_owners, $brand_owner, $selected_brand_owner;
     public $selected_status, $status, $selecteds;
-    public $total_unit_quantity, $batch_unit_quantity, $expired_date, $manufactured_date;
+    public $total_unit_quantity, $batch_unit_quantity;
     protected $listeners = [ 'dynamic-select' => 'dynamicHandler' ];
 
     public $statuses = [
@@ -47,8 +46,6 @@ class Create extends Component
     {
         $this->validate();
         $counter = 0;
-        $this->manufactured_date = Carbon::createFromFormat('d-m-Y', $this->manufactured_date)->toDateString();
-        $this->expired_date = Carbon::createFromFormat('d-m-Y', $this->expired_date)->toDateString();
 
 
         while(($this->total_unit_quantity - $this->batch_unit_quantity > 0) || ($this->total_unit_quantity > 0))
@@ -72,14 +69,12 @@ class Create extends Component
                 'unit_quantity' => $this->unit_quantity,
                 'status' => $this->status,
                 'description' => $this->description,
-                'manufactured_at' => $this->manufactured_date,
-                'expired_at' => $this->expired_date,
                 'remark' => $this->remark,
                 'brand_owner_id' => $this->brand_owner,
             ]);
 
             $unit = Unit::create([
-                'name' => $this->name_join . ' unit',
+                'name' => $this->name_join,
                 'quantity' => $this->unit_quantity,
                 'batch_id' => $batch->id,
             ]);

@@ -13,19 +13,19 @@
         <div class="form-group">
             <div class="row">
                 <div class="form-group col-6">
-                    <label for="quantity">Quantity</label>
+                    <label for="quantity">Bundle per Batch Quantity</label>
                     <input id="quantity" type="number" class="form-control" name="quantity" wire:model="quantity">
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group col-6">
-                    <label for="unit">Batch Unit</label>
-                    <select wire:model="unit" class="form-control selectric">
-                        <option value="">Select a Batch Unit</option>
-                        @foreach($units as $unit)
-                        @if($unit == $selected_unit)
-                        <option selected value="{{ $unit }}">{{ ucfirst($unit) }}</option>
+                    <label for="batch">Batch</label>
+                    <select wire:model="batch" class="form-control selectric">
+                        <option value="">Select a Batch</option>
+                        @foreach($batches as $batch)
+                        @if($batch == $selected_batch)
+                        <option selected value="{{ $batch }}">{{ ucfirst($batch) }}</option>
                         @else
-                        <option value="{{ $unit }}">{{ ucfirst($unit) }}</option>
+                        <option value="{{ $batch }}">{{ ucfirst($batch) }}</option>
                         @endif
                         @endforeach
                 </select>

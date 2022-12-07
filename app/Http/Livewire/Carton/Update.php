@@ -3,13 +3,13 @@
 namespace App\Http\Livewire\Carton;
 
 use App\Models\Carton;
-use App\Models\Bundle;
+use App\Models\Batch;
 use Livewire\Component;
 
 class Update extends Component
 {
 
-    public $name, $quantity, $description, $remark, $bundles, $bundle, $selected_bundle, $carton;
+    public $name, $quantity, $description, $remark, $batches, $batch, $selected_batch, $carton;
 
     public function mount($id)
     {
@@ -18,9 +18,9 @@ class Update extends Component
         $this->quantity = $this->carton->quantity;
         $this->description = $this->carton->description;
         $this->remark = $this->carton->remark;
-        $this->bundle = $this->carton->bundle->name;
-        $this->selected_bundle = $this->bundle;
-        $this->bundles = Bundle::pluck('name')->toArray();
+        $this->batch = $this->carton->batch->name;
+        $this->selected_batch = $this->batch;
+        $this->batches = Batch::pluck('name')->toArray();
 
     }
 
@@ -30,15 +30,15 @@ class Update extends Component
         $this->carton->quantity = $this->quantity;
         $this->carton->description = $this->description;
         $this->carton->remark = $this->remark;
-        $this->carton->bundle_id = Bundle::where('name', $this->bundle)->first()->id;
+        $this->carton->batch_id = Batch::where('name', $this->batch)->first()->id;
         $this->carton->push();
 
         $this->emit('flash.message', ['info' => 'Batch carton is Updated Successfully']);
     }
 
-    public function updatedBundle()
+    public function updatedBatch()
     {
-        $this->selected_bundle = $this->bundle;
+        $this->selected_batch = $this->batch;
     }
 
 

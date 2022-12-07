@@ -3,13 +3,14 @@
 namespace App\Http\Livewire\Unit;
 
 use App\Models\Unit;
+use App\Models\Batch;
 use Livewire\Component;
 
 class Update extends Component
 {
 
     public $name, $quantity, $description, $remark, $unit;
-    //public $brand_owners, $brand_owner, $selected_brand_owner
+    public $batches, $batch, $selected_batch;
 
     public function mount($id)
     {
@@ -18,9 +19,9 @@ class Update extends Component
         $this->quantity = $this->unit->quantity;
         $this->description = $this->unit->description;
         $this->remark = $this->unit->remark;
-        //$this->brand_owner = $this->unit->brand_owner->user->name;
-        // $this->selected_brand_owner = $this->brand_owner;
-        // $this->brand_owners = BrandOwner::with('user')->get()->pluck('user.name')->toArray();
+        $this->batch = $this->unit->batch->name;
+        $this->selected_batch = $this->batch;
+        $this->batches = Batch::pluck('name')->toArray();
 
     }
 
@@ -30,18 +31,16 @@ class Update extends Component
         $this->unit->quantity = $this->quantity;
         $this->unit->description = $this->description;
         $this->unit->remark = $this->remark;
-        // $this->unit->brand_owner_id = BrandOwner::whereHas('user', function( $query) {
-        //     return $query->where('name', '=', $this->brand_owners);
-        // })->first()->id;
+        $this->unit->batch_id = Batch::where('name', $this->batch)->first()->id;
         $this->unit->push();
 
         $this->emit('flash.message', ['info' => 'Batch Unit is Updated Successfully']);
     }
 
-    // public function updatedBrandOwner()
-    // {
-    //     $this->selected_brand_owner = $this->brand_owner;
-    // }
+    public function updatedBatch()
+    {
+        $this->selected_batch = $this->batch;
+    }
 
     public function render()
     {

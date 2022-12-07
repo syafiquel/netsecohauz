@@ -16,12 +16,14 @@
             @livewire('batch.update', ['id' => $id])
 
         @push('lib_style')
+        <link rel="stylesheet" href="{{ asset('css/daterangepicker.css') }}">
         @endpush
 
         @push('lib_script')
         @endpush
 
         @push('page_script')
+        <script type="text/javascript" src="{{ asset('js/daterangepicker.js') }}"></script>
         <script type="text/javascript">
             window.livewire.on('userStore', () => {
                 $('#modal-add-admin-part').modal("hide");

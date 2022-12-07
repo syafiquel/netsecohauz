@@ -22,8 +22,8 @@ class CreateBatchesTable extends Migration
             $table->string('name');
             $table->integer('unit_quantity');
             $table->string('status');
-            $table->date('manufactured_at');
-            $table->date('expired_at');
+            $table->date('manufactured_at')->nullable();
+            $table->date('expired_at')->nullable();
             $table->string('description');
             $table->string('remark');
             $table->timestamps();
