@@ -23,16 +23,16 @@ class DataTable extends DataTableComponent
             Column::make('Name')
                 ->label(fn($row) => $row->name)
                 ->searchable(),
-            Column::make('Carton /  Batch')
-                ->label(fn($row) => $row->quantity)
-                ->searchable(),
-            Bundle::where('batch_id', 1)->exists() ? 
-            Column::make('Bundle /  Carton')
-                ->label(fn($row) => ($row->batch->unit_quantity / $row->quantity) / ($row->batch->unit_quantity / Bundle::where('batch_id', 1)->first()->quantity))
-                ->searchable() : ''
-            ,
+            // Column::make('Carton /  Batch')
+            //     ->label(fn($row) => $row->quantity)
+            //     ->searchable(),
+            // Bundle::where('batch_id', 1)->exists() ? 
+            // Column::make('Bundle /  Carton')
+            //     ->label(fn($row) => ($row->batch->unit_quantity / $row->quantity) / ($row->batch->unit_quantity / Bundle::where('batch_id', 1)->first()->quantity))
+            //     ->searchable() : ''
+            // ,
             Column::make('Unit / Carton')
-                ->label(fn($row) => $row->batch->unit_quantity / $row->quantity)
+                ->label(fn($row) => $row->unit_quantity)
                 ->searchable(),
             Column::make('Batch')
                 ->label(fn($row) => $row->batch->name)

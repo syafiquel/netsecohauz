@@ -31,6 +31,7 @@ class Update extends Component
         $this->status = $this->batch->status;
         $this->manufactured_date = is_null($this->batch->manufactured_at) ? $this->batch->manufactured_at : Carbon::parse($this->batch->manufactured_at)->format('d-m-Y');
         $this->expired_date = is_null($this->batch->expired_at) ? $this->batch->expired_at : Carbon::parse($this->batch->expired_at)->format('d-m-Y');
+        
         $this->selected_brand_owner = $this->batch->brand_owner_id;
         $this->brand_owners = BrandOwner::pluck('name', 'id')->toArray();
         $this->remark = $this->batch->remark;
@@ -48,8 +49,9 @@ class Update extends Component
         $this->batch->unit_quantity = $this->unit_quantity;
         $this->batch->status = $this->selected_status;
         $this->batch->description = $this->description;
-        $this->batch->manufactured_at = Carbon::createFromFormat('d-m-Y', $this->manufactured_date)->toDateString();
-        $this->batch->expired_at = Carbon::createFromFormat('d-m-Y', $this->expired_date)->toDateString();
+        //dd($this->expired_date);
+        $this->batch->manufactured_at = Carbon::parse($this->manufactured_date)->format('Y-m-d');
+        $this->batch->expired_at = Carbon::parse($this->expired_date)->format('Y-m-d');
         $this->batch->remark = $this->remark;
         $this->batch->brand_owner_id = BrandOwner::where('name', $this->brand_owner)->first()->id;
         $this->batch->push();

@@ -13,11 +13,13 @@ class Batch extends Model
     protected $fillable = [
 
         'name',
-        'group_name',
         'description',
         'remark',
         'brand_owner_id',
         'unit_quantity',
+        'bundle_quantity',
+        'carton_quantity',
+        'palette_quantity',
         'manufactured_at',
         'expired_at',
         'status'

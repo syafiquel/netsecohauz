@@ -9,13 +9,13 @@ use Livewire\Component;
 class Update extends Component
 {
 
-    public $name, $quantity, $description, $remark, $batches, $batch, $selected_batch, $carton;
+    public $name, $unit_quantity, $description, $remark, $batches, $batch, $selected_batch, $carton;
 
     public function mount($id)
     {
         $this->carton = Carton::find($id);
         $this->name = $this->carton->name;
-        $this->quantity = $this->carton->quantity;
+        $this->unit_quantity = $this->carton->unit_quantity;
         $this->description = $this->carton->description;
         $this->remark = $this->carton->remark;
         $this->batch = $this->carton->batch->name;

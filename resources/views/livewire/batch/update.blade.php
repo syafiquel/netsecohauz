@@ -52,16 +52,28 @@
                         },
                         singleDatePicker: true
                         }, function(start, end, label){
+                            console.log(start);
                             $wire.set('manufactured_date', start.format('DD-MM-YYYY'));
-                        });
-                    }" wire:model.defer="manufactured_date" id="manufactured_date" autocomplete="off" class="form-control datepicker-manufactured">
+                        }
+                    );
+                }" wire:model.defer="manufactured_date" id="manufactured_date" autocomplete="off" class="form-control datepicker-manufactured">
                     <label>Manufactured Date</label>
                 </x-date-picker>
             </template>
             <template x-if="is_update">
-                <x-date-picker  x-init="if ($('.datepicker-manufactured').length) {
+                <x-date-picker x-init="if ($('.datepicker-manufactured').length) {
                     var startDate = $wire.get('manufactured_date');
-                    $('.datepicker-manufactured').daterangepicker({ startDate: startDate }) }" wire:model.defer="manufactured_date" id="manufactured_date" autocomplete="off" class="form-control datepicker-manufactured">
+                    $('.datepicker-manufactured').daterangepicker({ 
+                        singleDatePicker: true,
+                        locale: {
+                            format: 'DD-MM-YYYY'
+                        },
+                        startDate: startDate,
+                        }, function(start, end, label) {
+                            $wire.set('manufactured_date', start.format('DD-MM-YYYY'));
+                        }
+                    ); 
+                }" wire:model.defer="manufactured_date" id="manufactured_date" autocomplete="off" class="form-control datepicker-manufactured">
                     <label>Manufactured Date</label>
                 </x-date-picker>
             </template>
@@ -77,16 +89,27 @@
                         singleDatePicker: true
                         }, function(start, end, label){
                             $wire.set('expired_date', start.format('DD-MM-YYYY'));
-                        });
-                    }" wire:model.defer="expired_date" id="expired_date" autocomplete="off" class="form-control datepicker-expired">
+                        }
+                    );
+                }" wire:model.defer="expired_date" id="expired_date" autocomplete="off" class="form-control datepicker-expired">
                     <label>Expired Date</label>
                 </x-date-picker>
             </template>
             <template x-if="is_update">
                 <x-date-picker  x-init="if ($('.datepicker-expired').length) {
                     var startDate = $wire.get('expired_date');
-                    console.log(startDate);
-                    $('.datepicker-expired').daterangepicker({ startDate: startDate }) }" wire:model.defer="expired_date" id="expired_date" autocomplete="off" class="form-control datepicker-expired">
+                    $('.datepicker-expired').daterangepicker({ 
+                        locale: {
+                            format: 'DD-MM-YYYY'
+                        },
+                        startDate: startDate,
+                        singleDatePicker:true,
+                        }, function(start, end, label){
+                            console.log('called');
+                            $wire.set('expired_date', start.format('DD-MM-YYYY'));
+                        }
+                    );
+                }" wire:model.defer="expired_date" id="expired_date" autocomplete="off" class="form-control datepicker-expired">
                     <label>Expired Date</label>
                 </x-date-picker>
             </template>

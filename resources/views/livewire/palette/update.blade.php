@@ -13,8 +13,8 @@
         <div class="form-group">
             <div class="row">
                 <div class="form-group col-6">
-                    <label for="quantity">Palette per Batch Quantity</label>
-                    <input id="quantity" type="number" class="form-control" name="quantity" wire:model="quantity">
+                    <label for="unit_quantity">Unit per Palette Quantity</label>
+                    <input id="unit_quantity" type="number" class="form-control" name="unit_quantity" wire:model="unit_quantity">
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group col-6">

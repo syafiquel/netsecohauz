@@ -22,11 +22,11 @@ class DataTable extends DataTableComponent
             Column::make('Name')
                 ->label(fn($row) => $row->name)
                 ->searchable(),
-            Column::make('Palette / Batch')
-                ->label(fn($row) => $row->quantity)
-                ->searchable(),
             Column::make('Unit / Palette')
-                ->label(fn($row) => $row->batch->unit_quantity / $row->quantity)
+                ->label(fn($row) => $row->unit_quantity)
+                ->searchable(),
+            Column::make('Carton / Palette')
+                ->label(fn($row) => $row->unit_quantity / ($row->batch->unit_quantity / $row->batch->carton_quantity))
                 ->searchable(),
             Column::make('Batch')
                 ->label(fn($row) => $row->batch->name)

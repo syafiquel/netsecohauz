@@ -16,7 +16,7 @@ class Carton extends Model
         'description',
         'remark',
         'batch_id',
-        'quantity'
+        'unit_quantity'
     ];
 
     public function batch()

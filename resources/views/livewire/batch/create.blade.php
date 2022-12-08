@@ -32,13 +32,32 @@
                             <input type="number" class="form-control" placeholder="Total Unit Quantity" name="total_unit_quantity" wire:model="total_unit_quantity">
                             @error('total_unit_quantity') <span class="error">{{ $message }}</span> @enderror
                         </div>
-                        <label>Units per Batch Quantity</label>
+                        <label>Unit per Palette Quantity</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-envelope"></i></div>
                             </div>
-                            <input type="number" class="form-control" placeholder="Units per Batch Quantity" name="batch_unit_quantity" wire:model="batch_unit_quantity">
-                            @error('batch_unit_quantity') <span class="error">{{ $message }}</span> @enderror
+                            <input type="number" class="form-control" placeholder="Units per Palette Quantity" name="unit_per_palette_quantity" wire:model="unit_per_palette_quantity">
+                            @error('unit_per_palette_quantity') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit per Carton Quantity</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-envelope"></i></div>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Unit per Carton Quantity" name="unit_per_carton_quantity" wire:model="unit_per_carton_quantity">
+                            @error('unit_per_carton_quantity') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+                        <label>Units per Bundle Quantity</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-envelope"></i></div>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Units per Bundle Quantity" name="unit_per_bundle_quantity" wire:model="unit_per_bundle_quantity">
+                            @error('unit_per_bundle_quantity') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
