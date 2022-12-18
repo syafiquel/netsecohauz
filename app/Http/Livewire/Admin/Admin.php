@@ -4,12 +4,10 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 
-
 class Admin extends Component
 {
-
     public function render()
-    {
-        return view('livewire.admin.admin')->extends('layouts.app');
+    {      
+        return view('livewire.admin.admin');
     }
 }
