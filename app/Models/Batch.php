@@ -29,4 +29,16 @@ class Batch extends Model
     {
         return $this->belongsTo(BrandOwner::class);
     }
+
+    public function racking()
+    {
+        return $this->hasOneThrough(
+            Racking::class,
+            Palette::class,
+            'batch_id',
+            'palette_id',
+            'id',
+            'id'
+        );
+    }
 }

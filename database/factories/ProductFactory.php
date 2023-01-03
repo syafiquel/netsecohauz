@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Product;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+
 
 class ProductFactory extends Factory
 {
@@ -16,10 +16,9 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'brand_owner_id' => 1,
-            'category_id' => 1, 
-            'description' => Str::random(10),
+            'name' => Str::title($this->faker->words(10, true)),
+            'category_id' => $this->faker->numberBetween(1, 6),
+            'industry_id' => $this->faker->numberBetween(1, 2),
         ];
     }
 }

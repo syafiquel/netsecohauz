@@ -9,13 +9,13 @@ use Livewire\Component;
 class Update extends Component
 {
 
-    public $name, $quantity, $description, $remark, $batches, $batch, $selected_batch, $bundle;
+    public $name, $unit_quantity, $description, $remark, $batches, $batch, $selected_batch, $bundle;
 
     public function mount($id)
     {
         $this->bundle = Bundle::find($id);
         $this->name = $this->bundle->name;
-        $this->quantity = $this->bundle->quantity;
+        $this->unit_quantity = $this->bundle->unit_quantity;
         $this->description = $this->bundle->description;
         $this->remark = $this->bundle->remark;
         $this->batch = $this->bundle->batch->name;
@@ -27,7 +27,7 @@ class Update extends Component
     public function save()
     {
         $this->bundle->name = $this->name;
-        $this->bundle->quantity = $this->quantity;
+        $this->bundle->unit_quantity = $this->unit_quantity;
         $this->bundle->description = $this->description;
         $this->bundle->remark = $this->remark;
         $this->bundle->batch_id = Batch::where('name', $this->batch)->first()->id;

@@ -21,4 +21,5 @@ class Racking extends Model
     {
         return $this->belongsTo(Palette::class);
     }
+
 }

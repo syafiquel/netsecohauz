@@ -18,7 +18,7 @@ class CreateBatchesTable extends Migration
             $table->uuid('uuid');
             $table->bigInteger('palette_id')->unsigned()->index()->nullable();
             $table->bigInteger('brand_owner_id')->unsigned()->index()->nullable();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->integer('unit_quantity');
             $table->integer('bundle_quantity');
             $table->integer('carton_quantity');

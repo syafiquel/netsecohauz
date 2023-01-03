@@ -34,6 +34,9 @@ class DataTable extends DataTableComponent
             Column::make('Unit / Carton')
                 ->label(fn($row) => $row->unit_quantity)
                 ->searchable(),
+            Column::make('Bundle / Carton')
+                ->label(fn($row) => $row->unit_quantity / ($row->batch->unit_quantity / $row->batch->bundle_quantity))
+                ->searchable(),
             Column::make('Batch')
                 ->label(fn($row) => $row->batch->name)
                 ->searchable(),

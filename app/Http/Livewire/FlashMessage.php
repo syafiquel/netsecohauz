@@ -11,7 +11,7 @@ class FlashMessage extends Component
 
     public function flashMessage($message)
     {
-        session()->flash('message', $message['info']);
+        session()->flash('message', $message);
     }
 
     public function render()

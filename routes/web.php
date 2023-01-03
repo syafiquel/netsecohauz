@@ -1,10 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Admin\Admin;
-use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Log;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -17,40 +13,44 @@ use Illuminate\Support\Facades\Log;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Auth::routes();
+
+Route::group(['middleware' => 'auth'], function() {
+
+    Route::get('/', function () {
+        return redirect('/home');
+    });
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::resource('admin', App\Http\Controllers\AdminController::class);
+
+    Route::resource('staff', App\Http\Controllers\StaffController::class);
+
+    Route::resource('brand-owner', App\Http\Controllers\BrandOwnerController::class);
+
+    Route::resource('product', App\Http\Controllers\ProductController::class);
+
+    Route::resource('unit', App\Http\Controllers\UnitController::class);
+
+    Route::resource('bundle', App\Http\Controllers\BundleController::class);
+
+    Route::resource('carton', App\Http\Controllers\CartonController::class);
+
+    Route::resource('palette', App\Http\Controllers\PaletteController::class);
+
+    Route::resource('batch', App\Http\Controllers\BatchController::class);
+
+    Route::get('racking/{palette}', function ($palette) {
+        return view('batch.racking', [ 'palette_id' => $palette ]);
+    })->name('racking.palette');
+
+    Route::get('racking', function () {
+        return view('batch.racking');
+    })->name('racking');
+
+
 });
 
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->group(function () {
-
-//     Route::get('/dashboard', function () {
-//         Log::debug('logged');
-//         return view('dashboard');
-//     })->name('dashboard');
-// });
-
-Route::get('/dashboard', function () {
-    return view('partials.dashboard');
-})->name('dashboard');
-
-
-Route::get('user/admin', function () {
-    return view('admin.create');
-})->name('admin.create');
-
-Route::get('user/client', function () {
-    return view('client.index');
-})->name('client.index');
-
-Route::get('user/client/create', function () {
-    return view('client.create');
-})->name('client.create');
-
-Route::post('/register/create', [AuthController::class, 'store'])
-    ->middleware([config('jetstream.auth_session')])
-    ->name('register.create');
 

@@ -64,6 +64,10 @@
 <script type="text/javascript" src="{{ asset('js/qrcode.js') }}"></script>
 <script type="text/javascript">
     
+    window.livewire.on('userStore', () => {
+        $('#modal-add-batch-part').modal("hide");
+    });
+
     window.addEventListener('open-qr-code-modal', event => {
         $('#modal-qr-code-part').modal('show');
     });
