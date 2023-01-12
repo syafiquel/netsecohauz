@@ -33,9 +33,9 @@
                             <tr>
                                 <td>{{ $row }}</td>
                             @foreach($columns as $k => $column)
-                                @if(isset($palette_id))
+                                {{-- @if(isset($palette_id))
                                     <div>
-                                        <td x-init="" x-on:dblclick="console.log('test alpine')" id="{{ $section . $row . $column }}" wire:click="cellClicked('{{ $section . '.' . $row . '.' . $column }}')"
+                                        <td id="{{ $section . $row . $column }}" wire:click="cellClicked('{{ $section . '.' . $row . '.' . $column }}')"
                                         style="color:white;{{ (\App\Models\Racking::where([ 'section' => $section, 'row' => $row, 'column' => $column ])->first()->palette_id == null) ? 'background-color:blue;' : 'background-color:red;' }}">
                                         {{ $section . $row . $column }}</td>
                                     </div>
@@ -43,7 +43,12 @@
                                     <td id="{{ $section . $row . $column }}" wire:click="discardCell('{{ $section . '.' . $row . '.' . $column }}')" 
                                     style="color:white;{{ (\App\Models\Racking::where([ 'section' => $section, 'row' => $row, 'column' => $column ])->first()->palette_id == null) ? 'background-color:blue;' : 'background-color:red;' }}">
                                     {{ $section . $row . $column }}</td>
-                                @endif
+                                @ --}}
+                                <div>
+                                        <td id="{{ $section . $row . $column }}" wire:click="cellClicked('{{ $section . '.' . $row . '.' . $column }}')"
+                                        style="color:white;{{ (\App\Models\Racking::where([ 'section' => $section, 'row' => $row, 'column' => $column ])->first()->palette_id == null) ? 'background-color:blue;' : 'background-color:red;' }}">
+                                        {{ $section . $row . $column }}</td>
+                                    </div>
                             @endforeach
                             </tr>
                         @endforeach

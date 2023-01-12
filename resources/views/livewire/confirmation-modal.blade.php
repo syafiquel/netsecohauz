@@ -27,6 +27,8 @@
                 var param = {};
                 param.type = event.detail.type;
                 param.id = event.detail.id;
+                if(event.detail.data !== undefined)
+                    param.data = event.detail.data;
                 window.livewire.emit('delete-event', param);
             });
         });

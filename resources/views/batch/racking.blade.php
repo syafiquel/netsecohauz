@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <x-slot name="header">
         <div class="section-header">
             <h1>Racking</h1>
@@ -12,7 +11,9 @@
 
 
     <div class="card-body p-0">
-        <x-slot name="card_header"></x-slot>
+        <x-slot name="card_header">
+            <x-button-card-header display="invisible"  target="#modal-add-racking-slot-part">Add</x-button-card-header>
+        </x-slot>
 
         @livewire('flash-message')
 
@@ -25,15 +26,13 @@
                 @endif
             </div>
             <div class="col-md-4">
-                <div id="racking-detail" class="h-100" style="margin-top:75%; margin-left: 20%;">
-                    <table class="racking-table">
-                        <tbody id="racking-table-body">
-                        </tbody>
-                    </table>
-            </div>
-                
+                @livewire('batch.racking-info')
             </div>
         </div>
+        <x-slot name="modal">
+            @livewire('confirmation-modal')
+            @livewire('batch.racking-data-list')
+        </x-slot>
     </div>
 
 
@@ -60,6 +59,23 @@
         width: auto;
         height: 1.5em;
     }
+
+    @media screen and (min-width: 768px) {
+
+        #racking-detail {
+            margin-top: 50%; 
+            margin-left: 20%;
+        }
+    }
+
+        @media screen and (min-width: 360px) and (max-width: 768px) {
+
+        .racking-detail {
+            margin-top: 40%; 
+            margin-left: 20%;
+        }
+    }
+    
     </style>
     @endpush
 
@@ -69,11 +85,17 @@
     @push('page_script')
     <script type="text/javascript">
         window.addEventListener('updated-racking', event => {
-            window.livewire.reload();
+            window.livewire.restart();
         });
 
         window.addEventListener('racking-detail', event => {
             var header, content;
+            var section = event.detail.cell.section;
+            var row = event.detail.cell.row;
+            var column = event.detail.cell.column;
+            var cell = section + '.' + row + '.' + column;
+
+            $("#racking-table-body").find("tr:gt(0)").remove();            
             for (var i = 0; i < 8; i++) {
                 switch(i)
                 {
@@ -111,14 +133,42 @@
                     default:
                         break;
                 }
+
                 $('#racking-table-body').append(
                     `<tr>
                         <td>${header}</td>
                         <td>${content}</td>
                     </tr>`);
+
             }
+
+            $('#remove-racking').css('display', 'block');
+
+            var param = {};
+            param.type = 'init';
+            param.cell = cell;
+            window.livewire.emit('racking-delete', param);
+           
             
         });
+
+        window.livewire.on('userDeleted', data => {
+            $('#modal-confirm').modal("hide");
+            $('#racking-detail').css('display', 'none');
+            window.livewire.emit('racking-deleted', data);
+        });
+
+        window.livewire.on('racking-deleted', data => {
+            var id = '#' + data;
+            $(id).css('background-color', 'blue');
+        });
+
+        window.livewire.on('racking-palette-popup', () => {
+            $('#open-modal-btn').click();
+        });
+
+
+
     </script>
     @endpush
 

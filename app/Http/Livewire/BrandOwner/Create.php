@@ -11,10 +11,11 @@ use Livewire\Component;
 class Create extends Component
 {
 
-    public $name, $email, $phone, $password;
+    public $user_name, $name, $email, $phone, $password;
 
     protected $rules = [
         'name' => 'required',
+        'user_name' => 'required',
         'email' => 'required|email',
         'password' => 'required',
         'phone' => 'required',
@@ -31,8 +32,7 @@ class Create extends Component
 
 
         $user = User::create([
-
-            'name' => $this->name,
+            'name' => $this->user_name,
             'email' => $this->email,
             'password' => $this->password,
         ]);
@@ -41,6 +41,7 @@ class Create extends Component
 
             'user_id' => $user->id,
             'phone' => $this->phone,
+            'name' => $this->name,
 
         ]);
 

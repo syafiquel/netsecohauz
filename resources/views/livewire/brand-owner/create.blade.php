@@ -17,11 +17,21 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-envelope"></i></div>
                             </div>
-                            <input type="text" class="form-control" placeholder="User Name" name="name" wire:model="name">
+                            <input type="text" class="form-control" placeholder="User Name" name="user_name" wire:model="user_name">
                             @error('name') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label>Company Name</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-envelope"></i></div>
+                            </div>
+                            <input id="name" type="text" class="form-control" name="name" placeholder="Company Name" wire:model="name">
+                            @error('name') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label>Email</label>

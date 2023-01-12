@@ -8,6 +8,7 @@ use App\Models\Unit;
 use App\Models\Bundle;
 use App\Models\Carton;
 use App\Models\Palette;
+use App\Models\Racking;
 use Livewire\Component;
 
 class ConfirmationModal extends Component
@@ -61,13 +62,21 @@ class ConfirmationModal extends Component
                     $palette->delete();
                 }
                 break;
+            case 'racking':
+                if(Racking::find($data['id']))
+                {
+                    $racking = Racking::find($data['id']);
+                    $racking->palette_id = null;
+                    $racking->save();
+                }
+                break;
             default:
                 break;
 
         }
         
         $this->emit('flash.message', ['info' =>  ucfirst($data['type']) . ' Deleted Successfully']);
-        $this->emit('userDeleted');
+        $this->emit('userDeleted', $data['data']);
         $this->emit('refreshDatatable');
     }
 

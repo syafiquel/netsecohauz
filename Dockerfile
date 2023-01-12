@@ -13,4 +13,4 @@ COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
 WORKDIR /code
 
-#ENTRYPOINT [ "php", "artisan", "serve", "--host", "0.0.0.0", "--port", "80" ]
+ENTRYPOINT [ "php", "artisan", "serve", "--host", "0.0.0.0", "--port", "80" ]

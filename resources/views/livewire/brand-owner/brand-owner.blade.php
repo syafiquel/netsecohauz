@@ -13,7 +13,7 @@
     <div class="card-body p-0">
 
         <x-slot name="card_header">
-            <x-button-card-header data-target="#modal-add-brand-owner-part">Add</x-button-card-header>
+            <x-button-card-header target="#modal-add-brand-owner-part">Add</x-button-card-header>
         </x-slot>
 
         @livewire('flash-message')

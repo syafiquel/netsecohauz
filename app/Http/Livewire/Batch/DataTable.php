@@ -23,6 +23,9 @@ class DataTable extends DataTableComponent
             Column::make('Name')
                 ->label(fn($row) => $row->name)
                 ->searchable(),
+            Column::make('No')
+                ->label(fn($row) => $row->no)
+                ->searchable(),
             Column::make('Units Quantity')
                 ->label(fn($row) => $row->unit_quantity)
                 ->searchable(),

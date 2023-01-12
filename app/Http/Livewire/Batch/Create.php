@@ -74,6 +74,9 @@ class Create extends Component
                 'brand_owner_id' => $this->brand_owner,
             ]);
 
+            $batch->no = sprintf('%06d', strval($batch->id));
+            $batch->save();
+
             while(($palette_unit_quantity - $this->unit_per_palette_quantity > 0) || ($palette_unit_quantity > 0))
             {
                 $palette_counter++;
@@ -153,6 +156,7 @@ class Create extends Component
 
         catch(QueryException $e)
         {
+            dd($e);
             $this->emit('userStore');
             $this->emit('flash.message', ['info' => 'Batch name ' . $this->name . ' is already created', 'type' => 'danger']);
         }
