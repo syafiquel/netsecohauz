@@ -29,9 +29,7 @@ class Racking extends Component
         $racking = Model::where([
             'section' => $cells[0],
             'row' => $cells[1],
-            'column' => $cells[2]])->with('palette')->first();
-
-        
+            'column' => $cells[2]])->with('palette.batch')->first();        
         // if($this->current_click < 5)
         // {
             // if(!Model::where('palette_id', $this->palette_id)->exists())
@@ -50,28 +48,25 @@ class Racking extends Component
 
             if(is_null($racking->palette))
             {
-                $this->emit('racking-palette-popup');
+                $this->emit('racking-palette-popup', $cell);
                 
             }
 
-            else if(Model::where('palette_id', $this->palette_id)->exists())
+            else
             {
-
-                $batch_id = $racking->palette->batch_id;
-                $batch = Batch::find($batch_id)->with('racking.palette')->first();
-                $data = $batch->toArray();
+                $data = $racking->toArray();
                 $data['cell']['section'] = $cells[0];
                 $data['cell']['row'] = $cells[1];
                 $data['cell']['column'] = $cells[2];
                 $this->dispatchBrowserEvent('racking-detail', $data);
             }
 
-            else
-            {
-                $message = 'Multiple action not allowed';
-                $this->emit('flash.message', ['info' => $message, 'type' => 'warning' ]);
-                $this->dispatchBrowserEvent('updated-racking');
-            }
+            // else
+            // {
+            //     $message = 'Multiple action not allowed';
+            //     $this->emit('flash.message', ['info' => $message, 'type' => 'warning' ]);
+            //     $this->dispatchBrowserEvent('updated-racking');
+            // }
         //}
 
         // else

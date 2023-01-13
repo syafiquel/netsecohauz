@@ -101,15 +101,15 @@
                 {
                     case 0:
                         header = 'Palette Id';
-                        content = event.detail.racking.palette.id;
+                        content = event.detail.palette.id;
                         break;
                     case 1:
                         header = 'Palette Name';
-                        content = event.detail.racking.palette.name;
+                        content = event.detail.palette.name;
                         break;
                     case 2:
                         header = 'Racking Slot';
-                        content = event.detail.racking.section + '.' + event.detail.racking.row + '.' + event.detail.racking.column;
+                        content = event.detail.cell.section + '.' + event.detail.cell.row + '.' + event.detail.cell.column;
                         break;
                     case 3:
                         header = 'Batch Id';
@@ -125,11 +125,11 @@
                         break;
                     case 6:
                         header = 'Date In';
-                        content = new Date(event.detail.racking.palette.created_at).toDateString();
+                        content = new Date(event.detail.created_at).toDateString();
                         break;
                     case 7:
                         header = 'Date Out';
-                        content = new Date(event.detail.racking.palette.created_at).toDateString();
+                        content = new Date(event.detail.created_at).toDateString();
                     default:
                         break;
                 }
@@ -161,11 +161,28 @@
         window.livewire.on('racking-deleted', data => {
             var id = '#' + data;
             $(id).css('background-color', 'blue');
+            window.livewire.emit('testev');
         });
 
-        window.livewire.on('racking-palette-popup', () => {
+        window.livewire.on('racking-palette-popup', data => {
             $('#open-modal-btn').click();
+            window.livewire.emit('racking-palette-adding', data);
+
         });
+
+        window.livewire.on('racking-palette-added', data => {
+            var id = '#' + data.cell;
+            $(id).css('background-color', 'red');
+            var message = 'Racking cell ' + data.cell + ' has been assigned to palette "' + data.palette + '"';
+            var info = { 'info': message };
+            $('#modal-add-racking-slot-part').modal("hide");
+            window.livewire.emit('flash.message', info);
+            window.livewire.emit('racking-palette-clear');
+            window.livewire.emit('testev');
+
+        });
+
+
 
 
 
