@@ -89,7 +89,6 @@
         });
 
         window.addEventListener('racking-detail', event => {
-            console.log(event.detail);
             var header, content;
             var section = event.detail.cell.section;
             var row = event.detail.cell.row;

@@ -20,15 +20,15 @@
 @once
     @push('page_script')
     <script type="text/javascript">
-        window.addEventListener('open-confirm-modal', event => {
-            $('div > p').text(event.detail.message);
+        window.livewire.on('open-confirm-modal', data => {
+            $('div > p').text(data.message);
             $('#modal-confirm').modal('show');
             $('#btn').click(function() {
                 var param = {};
-                param.type = event.detail.type;
-                param.id = event.detail.id;
-                if(event.detail.data !== undefined)
-                    param.data = event.detail.data;
+                param.type = data.type;
+                param.id = data.id;
+                if(data.data !== undefined)
+                    param.data = data.data;
                 window.livewire.emit('delete-event', param);
             });
         });

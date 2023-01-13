@@ -39,7 +39,7 @@ class RackingInfo extends Component
                 'message' => 'Confirm racking '. $racking->section . '.' . $racking->row . '.' . $racking->column . ' deletion?',
                 'data' => $racking->section . $racking->row . $racking->column,
             ];
-            $this->dispatchBrowserEvent('open-confirm-modal', $param);
+            $this->emit('open-confirm-modal', $param);
         }
     }
 }

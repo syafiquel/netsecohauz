@@ -77,7 +77,7 @@ class DataTable extends DataTableComponent
 
     public function emitEvent($data)
     {
-        $this->dispatchBrowserEvent('open-confirm-modal', $data);
+        $this->emit('open-confirm-modal', $data);
     }
 
     public function emitQrCodeEvent()
