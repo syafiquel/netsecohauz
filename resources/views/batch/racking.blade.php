@@ -89,13 +89,14 @@
         });
 
         window.addEventListener('racking-detail', event => {
+            console.log(event.detail);
             var header, content;
             var section = event.detail.cell.section;
             var row = event.detail.cell.row;
             var column = event.detail.cell.column;
             var cell = section + '.' + row + '.' + column;
 
-            $("#racking-table-body").find("tr:gt(0)").remove();            
+            $("#racking-table-body").find("tr").remove();            
             for (var i = 0; i < 8; i++) {
                 switch(i)
                 {
@@ -113,15 +114,15 @@
                         break;
                     case 3:
                         header = 'Batch Id';
-                        content = event.detail.id;
+                        content = event.detail.palette.batch_id;
                         break;
                     case 4:
                         header = 'Batch Name';
-                        content = event.detail.name;
+                        content = event.detail.palette.batch.name;
                         break;
                     case 5:
                         header = 'Status';
-                        content = event.detail.status;
+                        content = event.detail.palette.batch.status;
                         break;
                     case 6:
                         header = 'Date In';
@@ -142,6 +143,7 @@
 
             }
 
+            $('#racking-detail').css('display', 'block');
             $('#remove-racking').css('display', 'block');
 
             var param = {};
