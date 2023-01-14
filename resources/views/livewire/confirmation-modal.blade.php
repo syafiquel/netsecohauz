@@ -1,4 +1,4 @@
-<div wire:ignore.self class="modal fade" id="modal-confirm" tabindex="-1" role="dialog" aria-labelledby="confirmationModal" aria-hidden="true">
+<div wire:ignore class="modal fade" id="modal-confirm" tabindex="-1" role="dialog" aria-labelledby="confirmationModal" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">             
@@ -12,7 +12,7 @@
             </div>  
             <div class="modal-footer bg-whitesmoke">           
                 <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
-                <button id="btn" type="button" class="btn btn-primary close-modal">Action</button>
+                <button id="btn" wire:click="delete()" type="button" class="btn btn-primary close-modal">Action</button>
             </div>   
         </div>
     </div>
@@ -21,16 +21,18 @@
     @push('page_script')
     <script type="text/javascript">
         window.livewire.on('open-confirm-modal', data => {
+            var param = {};
+            param.type = data.type;
+            param.id = data.id;
+            if(data.data !== undefined)
+                param.data = data.data;
             $('div > p').text(data.message);
             $('#modal-confirm').modal('show');
-            $('#btn').click(function() {
-                var param = {};
-                param.type = data.type;
-                param.id = data.id;
-                if(data.data !== undefined)
-                    param.data = data.data;
-                window.livewire.emit('delete-event', param);
-            });
+            var livewireId = $('#modal-confirm').attr('wire:id');
+            window.livewire.find(livewireId).set('data', param);
+            // $('#btn').click(function() {
+            //     window.livewire.emit('delete-event', param);
+            // });
         });
     </script>
     @endpush

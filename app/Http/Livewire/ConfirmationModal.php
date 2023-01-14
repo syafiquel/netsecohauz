@@ -14,10 +14,20 @@ use Livewire\Component;
 class ConfirmationModal extends Component
 {
 
+    public $status;
+
     protected $listeners = ['delete-event' => 'delete'];
 
-    public function delete($data)
+    public function mount()
     {
+        $this->data = array();
+    }
+
+    public function delete($data=null)
+    {
+        if(is_null($data))
+            $data = $this->data;
+        
         switch( $data['type'] )
         {
             case 'user':
