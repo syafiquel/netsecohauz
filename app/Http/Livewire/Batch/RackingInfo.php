@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Batch;
 
 use Livewire\Component;
 use App\Models\Racking;
-use Illuminate\Support\Facades\Log;
 
 class RackingInfo extends Component
 {
@@ -40,7 +39,6 @@ class RackingInfo extends Component
                 'message' => 'Confirm racking '. $racking->section . '.' . $racking->row . '.' . $racking->column . ' deletion?',
                 'data' => $racking->section . $racking->row . $racking->column,
             ];
-            Log::debug($param);
             $this->emit('open-confirm-modal', $param);
         }
     }

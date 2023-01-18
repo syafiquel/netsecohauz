@@ -26,10 +26,10 @@ class DataTable extends DataTableComponent
                 ->label(fn($row) => $row->unit_quantity)
                 ->searchable(),
             Column::make('Carton / Palette')
-                ->label(fn($row) => $row->unit_quantity / ($row->batch->unit_quantity / $row->batch->carton_quantity))
+                ->label(fn($row) => ceil($row->unit_quantity / ($row->batch->unit_quantity / $row->batch->carton_quantity)))
                 ->searchable(),
             Column::make('Bundle / Palette')
-                ->label(fn($row) => $row->unit_quantity / ($row->batch->unit_quantity / $row->batch->bundle_quantity))
+                ->label(fn($row) => ceil($row->unit_quantity / ($row->batch->unit_quantity / $row->batch->bundle_quantity)))
                 ->searchable(),
             Column::make('Batch')
                 ->label(fn($row) => $row->batch->name)
