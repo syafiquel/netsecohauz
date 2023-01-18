@@ -23,4 +23,9 @@ class Palette extends Model
     {
         return $this->belongsTo(Batch::class);
     }
+
+    public function racking()
+    {
+        return $this->hasOne(Racking::class);
+    }
 }

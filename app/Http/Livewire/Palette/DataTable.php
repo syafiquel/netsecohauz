@@ -6,6 +6,7 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Palette;
+use App\Models\Racking;
 
 class DataTable extends DataTableComponent
 {
@@ -57,9 +58,13 @@ class DataTable extends DataTableComponent
                         return "<button wire:click='emitEvent($json_data)' class='btn btn-danger'><i class='fa-solid fa-trash'></i></button>";
                     }
                 )->html(),
+            // Column::make('')
+            //     ->label(
+            //         fn($row, Column $column) => "<a href='#' class='btn btn-info' role='button'><i class='fa-solid fa-table-cells'></i></a>"
+            //     )->html(),
             Column::make('')
                 ->label(
-                    fn($row, Column $column) => "<a href='/racking/$row->id' class='btn btn-info' role='button'><i class='fa-solid fa-table-cells'></i></a>"
+                    fn($row, Column $column) => isset(Racking::where('palette_id', $row->id)->first()->palette_id) ? "<a href='#' class='btn btn-danger' role='button'><i class='fa-solid fa-table-cells'></i></a>" : "<a href='#' class='btn btn-info' role='button'><i class='fa-solid fa-table-cells'></i></a>"
                 )->html(),
             Column::make('')
                 ->label(
