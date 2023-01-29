@@ -56,7 +56,7 @@ class Update extends Component
     public function save()
     {
         $image = TemporaryUploadedFile::createFromLivewire($this->image);
-        $image_file_name = $this->name . '_' . $this->batch->no . '.'  . $image->getClientOriginalExtension();
+        $image_file_name = str_replace(' ', '_', $this->name) . '_' . $this->batch->no . '.'  . $image->getClientOriginalExtension();
         $image_path = $image->storeAs('/uploads/images', $image_file_name, 'real_public');
         $this->batch->name = $this->name;
         $this->batch->unit_quantity = $this->unit_quantity;
