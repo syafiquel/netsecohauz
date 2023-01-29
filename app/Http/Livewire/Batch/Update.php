@@ -5,14 +5,16 @@ namespace App\Http\Livewire\Batch;
 use App\Models\Batch;
 use App\Models\BrandOwner;
 use Livewire\Component;
+use Livewire\TemporaryUploadedFile;
 use Illuminate\Support\Carbon;
+
 
 
 class Update extends Component
 {
 
     public $name, $unit_quantity, $status, $selected_status, $description, $remark, $brand_owners, $brand_owner, $selected_brand_owner, $batch;
-    public $expired_date, $manufactured_date;
+    public $expired_date, $manufactured_date, $image;
     public $calendar_update = false;
     public $statuses = [
         'warehouse (pre-production)',
@@ -20,6 +22,8 @@ class Update extends Component
         'warehouse (post-production)',
         'shipped out',
     ];
+
+    protected $listeners = ['save_image' => 'imageUploadHandler'];
 
     public function mount($id)
     {
@@ -40,20 +44,29 @@ class Update extends Component
             $this->calendar_update = false;
         else
         $this->calendar_update = true;
+        $this->image = is_null($this->image) ? '' : $this->batch->image;
 
+    }
+
+    public function imageUploadHandler($temp_image)
+    {
+        $this->image = $temp_image;
     }
 
     public function save()
     {
+        $image = TemporaryUploadedFile::createFromLivewire($this->image);
+        $image_file_name = $this->name . '_' . $this->batch->no . '.'  . $image->getClientOriginalExtension();
+        $image_path = $image->storeAs('/uploads/images', $image_file_name, 'real_public');
         $this->batch->name = $this->name;
         $this->batch->unit_quantity = $this->unit_quantity;
         $this->batch->status = $this->selected_status;
         $this->batch->description = $this->description;
-        //dd($this->expired_date);
         $this->batch->manufactured_at = Carbon::parse($this->manufactured_date)->format('Y-m-d');
         $this->batch->expired_at = Carbon::parse($this->expired_date)->format('Y-m-d');
         $this->batch->remark = $this->remark;
         $this->batch->brand_owner_id = BrandOwner::where('name', $this->brand_owner)->first()->id;
+        $this->batch->image = $image_path;
         $this->batch->push();
 
         $this->emit('flash.message', ['info' => 'Batch Bundle is Updated Successfully']);

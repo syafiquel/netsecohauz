@@ -23,7 +23,8 @@ class Batch extends Model
         'palette_quantity',
         'manufactured_at',
         'expired_at',
-        'status'
+        'status',
+        'image'
     ];
 
     public function brand_owner()

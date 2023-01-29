@@ -21,14 +21,15 @@ class CreateBatchesTable extends Migration
             $table->bigInteger('brand_owner_id')->unsigned()->index()->nullable();
             $table->string('name')->unique();
             $table->integer('unit_quantity');
-            $table->integer('bundle_quantity');
+            $table->integer('bundle_quantity')->nullable();
             $table->integer('carton_quantity');
             $table->integer('palette_quantity');
             $table->string('status');
             $table->date('manufactured_at')->nullable();
             $table->date('expired_at')->nullable();
-            $table->string('description');
-            $table->string('remark');
+            $table->string('description')->nullable();
+            $table->string('remark')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

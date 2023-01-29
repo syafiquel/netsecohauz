@@ -128,6 +128,8 @@
                 <input id="remark" type="text" class="form-control" name="remark" autofocus wire:model="remark">
             </div>
         </div>
+
+        @livewire('image-uploader', ['label' => 'Upload Batch Image'])
         
         <div class="form-group">
             <button type="button" wire:click.prevent="save()" class="btn btn-primary btn-lg btn-block">
