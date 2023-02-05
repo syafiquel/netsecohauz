@@ -15,7 +15,8 @@ class BatchController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //Bypass for temp public access
+        //$this->middleware('auth');
     }
 
     /**
