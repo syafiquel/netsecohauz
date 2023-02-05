@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+    netzecohouz:
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
+        container_name: admin_api
+        ports:
+            - 8080:80
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - .:/code
+        working_dir: /code
+        depends_on:
+        #  - mongodb
+            - mysql
+    mysql:
+       container_name: mysql
+       image: mysql:8.0
+    #     ports:
+    #       - 3306:3306
+       environment:
+            MYSQL_ROOT_PASSWORD: mysqlroot
+            MYSQL_DATABASE: connected_packaging
+    #         MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    #     logging:
+    #         driver: none
+
+    phpmyadmin:
+        image: phpmyadmin
+        ports:
+            - 8081:80
+        environment:
+            - PMA_ARBITRARY=1
