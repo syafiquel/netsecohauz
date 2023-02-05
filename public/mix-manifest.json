@@ -1,0 +1,20 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/js/scripts.js": "/js/scripts.js",
+    "/js/custom.js": "/js/custom.js",
+    "/js/stisla.js": "/js/stisla.js",
+    "/js/jquery.dataTables.js": "/js/jquery.dataTables.js",
+    "/js/dataTables.bootstrap4.js": "/js/dataTables.bootstrap4.js",
+    "/js/select.bootstrap4.js": "/js/select.bootstrap4.js",
+    "/js/qrcode.js": "/js/qrcode.js",
+    "/js/modules-datatables.js": "/js/modules-datatables.js",
+    "/js/moment.js": "/js/moment.js",
+    "/js/daterangepicker.js": "/js/daterangepicker.js",
+    "/js/bootstrap-modal.js": "/js/bootstrap-modal.js",
+    "/css/style.css": "/css/style.css",
+    "/css/app.css": "/css/app.css",
+    "/css/dataTables.bootstrap4.min.css": "/css/dataTables.bootstrap4.min.css",
+    "/css/select.bootstrap4.min.css": "/css/select.bootstrap4.min.css",
+    "/css/components.css": "/css/components.css",
+    "/css/daterangepicker.css": "/css/daterangepicker.css"
+}
