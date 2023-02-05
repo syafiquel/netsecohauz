@@ -96,6 +96,7 @@ class BatchController extends Controller
 
     public function getPreProdAll()
     {
-        return response()->json(Batch::all());
+        $batches = Batch::select(['name', 'no', 'status', 'image'])->get();
+        return response()->json($batches);
     }
 }
