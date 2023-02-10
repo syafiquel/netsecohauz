@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Batch;
+use App\Models\BatchOperation;
 
 class BatchController extends Controller
 {
@@ -99,5 +100,25 @@ class BatchController extends Controller
     {
         $batches = Batch::select(['name', 'no', 'status', 'image'])->get();
         return response()->json($batches);
+    }
+
+    public function batchScanStart(Request $request)
+    {
+        $param = $request->route('uuid');
+        $batch = Batch::where('uuid', $param)->first();
+        BatchOperation::create([
+                'batch_id' => $batch->id
+        ]);
+
+    }
+
+    public function batchScanEnd(Request $request)
+    {
+        $param = $request->route('uuid');
+        $batch = Batch::where('uuid', $param)->first();
+        $batch_operation = BatchOperation::where('batch_id', $batch->id);
+        $batch_operation->updated_at = Carbon::now();
+        $batch_operation->save();
+
     }
 }

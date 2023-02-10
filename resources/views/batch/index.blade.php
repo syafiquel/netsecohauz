@@ -115,7 +115,6 @@
     <script src="{{ asset('js/bootstrap-modal.js') }}"></script>
     <script type="text/javascript">
     window.livewire.on('userStore', () => {
-        console.log('emit');
         $('#modal-add-admin-part').hide();
     });
     $('#add-admin-btn').attr("wire:click", "store()");

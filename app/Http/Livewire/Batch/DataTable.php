@@ -53,7 +53,7 @@ class DataTable extends DataTableComponent
                 )->html(),
             Column::make('')
                 ->label(
-                    fn($row, Column $column) => "<button class='btn btn-info' wire:click='emitEvent()'><i class='fa fa-qrcode'></i></a>"
+                    fn($row, Column $column) => "<button class='btn btn-info' wire:click='emitEvent(\"$row->uuid\")'><i class='fa fa-qrcode'></i></a>"
                 )->html(),
            
         ];
@@ -65,9 +65,9 @@ class DataTable extends DataTableComponent
         return Batch::query()->with('brand_owner');
     }
 
-    public function emitEvent()
+    public function emitEvent($uuid)
     {
-        $this->dispatchBrowserEvent('open-qr-code-modal');
+        $this->dispatchBrowserEvent('open-qr-code-modal', $uuid);
     }
 
     public static function getName()

@@ -64,18 +64,20 @@
 <script type="text/javascript" src="{{ asset('js/qrcode.js') }}"></script>
 <script type="text/javascript">
     
+    var uuid;
     window.livewire.on('userStore', () => {
         $('#modal-add-batch-part').modal("hide");
     });
 
     window.addEventListener('open-qr-code-modal', event => {
+        uuid = event.detail;
         $('#modal-qr-code-part').modal('show');
-    });
-
-    var canvas = document.getElementById('canvas');
-    QRCode.toCanvas(document.getElementById('canvas'), 'sampletext', function (error) {
+        var canvas = document.getElementById('canvas');
+        QRCode.toCanvas(document.getElementById('canvas'), uuid, function (error) {
         if (error) console.error(error)
     });
+    });
+
 
     document.getElementById("btnPrint").onclick = function () {
         var img = new Image;

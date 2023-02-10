@@ -55,5 +55,6 @@ Route::group(['middleware' => 'auth'], function() {
 
 // Batch API
 Route::get('batches', [App\Http\Controllers\BatchController::class, 'getPreProdAll'])->name('batch.pre-prod.all');
-
+Route::get('batch/scan/start/{uuid}', [App\Http\Controllers\BatchController::class, 'batchScanStart'])->name('batch.scan.start');
+Route::get('batch/scan/end/{uuid}', [App\Http\Controllers\BatchController::class, 'batchScanEnd'])->name('batch.scan.end');
 
