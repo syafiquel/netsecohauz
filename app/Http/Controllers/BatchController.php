@@ -117,7 +117,7 @@ class BatchController extends Controller
     {
         $param = $request->route('uuid');
         $batch = Batch::where('uuid', $param)->first();
-        $batch_operation = BatchOperation::where('batch_id', $batch->id);
+        $batch_operation = BatchOperation::where('batch_id', $batch->id)->first();
         $batch_operation->updated_at = Carbon::now();
         $batch_operation->save();
 
