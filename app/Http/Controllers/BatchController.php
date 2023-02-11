@@ -110,6 +110,7 @@ class BatchController extends Controller
         BatchOperation::create([
                 'batch_id' => $batch->id
         ]);
+        return response()->json(['response' => 'ok']);
 
     }
 
@@ -120,6 +121,7 @@ class BatchController extends Controller
         $batch_operation = BatchOperation::where('batch_id', $batch->id)->first();
         $batch_operation->updated_at = Carbon::now();
         $batch_operation->save();
+        return response()->json(['response' => 'ok']);
 
     }
 }
