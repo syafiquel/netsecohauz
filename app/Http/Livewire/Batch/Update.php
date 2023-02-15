@@ -20,6 +20,8 @@ class Update extends Component
         'warehouse (pre-production)',
         'on production',
         'warehouse (post-production)',
+        'warehouse (post-production loose)',
+        'warehouse (post-production defect)',
         'shipped out',
     ];
 

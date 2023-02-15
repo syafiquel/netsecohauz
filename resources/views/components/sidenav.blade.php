@@ -29,9 +29,9 @@
                 <a href="{{ route('batch.index') }}" class="nav-link"><i class="fa-solid fa-table-cells"></i><span>Incoming Batch</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-industry"></i><span>Batch Process</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-industry"></i><span>Batch Production</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="forms-advanced-form.html">Advanced Form</a></li>
+                    <li><a class="nav-link" href="{{ route('batch.production.summary') }}">Batch Summary</a></li>
                     <li><a class="nav-link" href="forms-editor.html">Editor</a></li>
                     <li><a class="nav-link" href="forms-validation.html">Validation</a></li>
                 </ul>

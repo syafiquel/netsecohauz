@@ -32,6 +32,11 @@ class Batch extends Model
         return $this->belongsTo(BrandOwner::class);
     }
 
+    public function batch_operation()
+    {
+        return $this->hasOne(BatchOperation::class);
+    }
+
     public function racking()
     {
         return $this->hasOneThrough(

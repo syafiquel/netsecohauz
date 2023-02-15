@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('palette', App\Http\Controllers\PaletteController::class);
 
     Route::resource('batch', App\Http\Controllers\BatchController::class);
+    Route::get('/batch/production/summary', [ App\Http\Controllers\BatchController::class, 'batchProductionSummary'])->name('batch.production.summary');
 
     Route::get('racking/{palette}', function ($palette) {
         return view('batch.racking', [ 'palette_id' => $palette ]);
@@ -57,4 +58,6 @@ Route::group(['middleware' => 'auth'], function() {
 Route::get('batches', [App\Http\Controllers\BatchController::class, 'getPreProdAll'])->name('batch.pre-prod.all');
 Route::get('batch/scan/start/{uuid}', [App\Http\Controllers\BatchController::class, 'batchScanStart'])->name('batch.scan.start');
 Route::get('batch/scan/end/{uuid}', [App\Http\Controllers\BatchController::class, 'batchScanEnd'])->name('batch.scan.end');
+Route::get('carton/scan/start/{uuid}', [App\Http\Controllers\CartonController::class, 'cartonScanStart'])->name('carton.scan.start');
+Route::get('carton/scan/end/{uuid}', [App\Http\Controllers\CartonController::class, 'cartonScanEnd'])->name('carton.scan.end');
 

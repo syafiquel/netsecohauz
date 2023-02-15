@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use App\Models\Batch;
 use App\Models\BatchOperation;
 use Illuminate\Support\Carbon;
@@ -112,6 +111,8 @@ class BatchController extends Controller
         BatchOperation::create([
                 'batch_id' => $batch->id
         ]);
+        $batch->status = 'on production';
+        $batch->save();
         return response()->json($batch);
 
     }
@@ -123,7 +124,14 @@ class BatchController extends Controller
         $batch_operation = BatchOperation::where('batch_id', $batch->id)->first();
         $batch_operation->updated_at = Carbon::now();
         $batch_operation->save();
+        $batch->status = 'warehouse (post-production)';
+        $batch->save();
         return response()->json($batch);
 
+    }
+
+    public function batchProductionSummary()
+    {
+        return view('livewire.production.batch');
     }
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Models\CartonProduction;
+use App\Models\Carton;
 
 class CartonController extends Controller
 {
@@ -80,5 +83,36 @@ class CartonController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function cartonScanStart(Request $request)
+    {
+        $param = $request->route('uuid');
+        $carton = Carton::where('uuid', $param)->first();
+        CartonProduction::create([
+                'carton_id' => $carton->id
+        ]);
+        $carton->remark = 'in progress';
+        $carton->save();
+        return response()->json($carton);
+
+    }
+
+    public function cartonScanEnd(Request $request)
+    {
+        $param = $request->route('uuid');
+        $carton = Carton::where('uuid', $param)->first();
+        $carton_production = CartonProduction::where('carton_id', $carton->id)->first();
+        $carton_production->updated_at = Carbon::now();
+        $carton_production->save();
+        $carton->remark = 'completed';
+        $carton->save();
+        return response()->json($carton);
+
+    }
+
+    public function cartonProductionSummary()
+    {
+        return view('livewire.production.carton');
     }
 }
