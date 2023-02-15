@@ -89,9 +89,11 @@ class CartonController extends Controller
     {
         $param = $request->route('uuid');
         $carton = Carton::where('uuid', $param)->first();
-        CartonProduction::create([
+        $carton_production = CartonProduction::create([
                 'carton_id' => $carton->id
         ]);
+        $carton_production->remark = 'in progress';
+        $carton_production->save();
         $carton->remark = 'in progress';
         $carton->save();
         return response()->json($carton);
@@ -104,6 +106,7 @@ class CartonController extends Controller
         $carton = Carton::where('uuid', $param)->first();
         $carton_production = CartonProduction::where('carton_id', $carton->id)->first();
         $carton_production->updated_at = Carbon::now();
+        $carton_production->remark = 'completed';
         $carton_production->save();
         $carton->remark = 'completed';
         $carton->save();
