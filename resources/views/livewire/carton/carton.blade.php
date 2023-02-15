@@ -45,12 +45,15 @@
     </script>
     <script type="text/javascript">
     
+        var uuid;
+
         window.addEventListener('open-qr-code-modal', event => {
+            uuid = event.detail;
             $('#modal-qr-code-part').modal('show');
         });
 
         var canvas = document.getElementById('canvas');
-        QRCode.toCanvas(document.getElementById('canvas'), 'sampletext', function (error) {
+        QRCode.toCanvas(document.getElementById('canvas'), uuid, function (error) {
             if (error) console.error(error)
         });
 
