@@ -1,6 +1,8 @@
 ARG PHP_VERSION=8.0
 ARG COMPOSER_VERSION=2.1.3
 
+#ENV COMPOSER_ALLOW_SUPERUSER=1
+
 FROM composer:${COMPOSER_VERSION}
 FROM php:${PHP_VERSION}-cli
 
@@ -11,6 +13,10 @@ RUN apt-get update && \
 
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
+RUN ls
+
 WORKDIR /code
 
-ENTRYPOINT [ "php", "artisan", "serve", "--host", "0.0.0.0", "--port", "80" ]
+#RUN composer install
+
+#ENTRYPOINT [ "php", "artisan", "serve", "--host", "0.0.0.0", "--port", "80" ]

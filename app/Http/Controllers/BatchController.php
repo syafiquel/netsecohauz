@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Models\Batch;
 use App\Models\BatchOperation;
 use Illuminate\Support\Carbon;
@@ -97,9 +98,10 @@ class BatchController extends Controller
         //
     }
 
-    public function getPreProdAll()
+    public function getPreProdAll(Request $request)
     {
-        $batches = Batch::select(['name', 'no', 'status', 'image'])->get();
+        $param = $request->route('option');
+        $batches = Batch::select(['name', 'no', 'status', 'image'])->where('status', 'warehouse (pre-production)')->get();
         return response()->json($batches);
     }
 
@@ -110,7 +112,7 @@ class BatchController extends Controller
         BatchOperation::create([
                 'batch_id' => $batch->id
         ]);
-        return response()->json(['response' => 'ok']);
+        return response()->json($batch);
 
     }
 
@@ -121,7 +123,7 @@ class BatchController extends Controller
         $batch_operation = BatchOperation::where('batch_id', $batch->id)->first();
         $batch_operation->updated_at = Carbon::now();
         $batch_operation->save();
-        return response()->json(['response' => 'ok']);
+        return response()->json($batch);
 
     }
 }
