@@ -22,8 +22,8 @@ class CreateBatchesTable extends Migration
             $table->string('name')->unique();
             $table->integer('unit_quantity');
             $table->integer('bundle_quantity')->nullable();
-            $table->integer('carton_quantity');
-            $table->integer('palette_quantity');
+            $table->integer('carton_quantity')->nullable();
+            $table->integer('palette_quantity')->nullable();
             $table->string('status');
             $table->date('manufactured_at')->nullable();
             $table->date('expired_at')->nullable();

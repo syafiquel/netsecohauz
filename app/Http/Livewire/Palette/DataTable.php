@@ -27,7 +27,7 @@ class DataTable extends DataTableComponent
                 ->label(fn($row) => $row->unit_quantity)
                 ->searchable(),
             Column::make('Carton / Palette')
-                ->label(fn($row) => ceil($row->unit_quantity / ($row->batch->unit_quantity / $row->batch->carton_quantity)))
+                ->label(fn($row) => isset($row->batch->carton_quantity) ? ceil($row->unit_quantity / ($row->batch->unit_quantity / $row->batch->carton_quantity)) : 'N/A')
                 ->searchable(),
             Column::make('Bundle / Palette')
                 ->label(fn($row) => ceil($row->unit_quantity / ($row->batch->unit_quantity / $row->batch->bundle_quantity)))
