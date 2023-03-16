@@ -14,7 +14,6 @@ class CreateBatchesRelation extends Migration
     public function up()
     {
         Schema::table('batches', function (Blueprint $table) {
-            $table->foreign('palette_id')->references('id')->on('palettes')->onDelete('cascade');
             $table->foreign('brand_owner_id')->references('id')->on('brand_owners')->onDelete('cascade');
         });
     }
