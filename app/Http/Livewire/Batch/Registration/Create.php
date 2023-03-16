@@ -50,7 +50,7 @@ class Create extends Component
                 'palette_quantity_in' => $this->unit_per_palette_quantity == 0 ? null : ceil($this->total_unit_quantity / $this->unit_per_palette_quantity) ,
                 'carton_quantity_in' => $this->unit_per_carton_quantity == 0 ? null : ceil($this->total_unit_quantity / $this->unit_per_carton_quantity),
                 'bundle_quantity' => $this->unit_per_bundle_quantity== 0 ? null : ceil($this->total_unit_quantity / $this->unit_per_bundle_quantity),
-                'status' => 'pre-production',
+                'status' => 'warehouse (pre-production)',
                 'description' => $this->description,
                 'remark' => $this->remark,
                 'brand_owner_id' => $this->brand_owner,

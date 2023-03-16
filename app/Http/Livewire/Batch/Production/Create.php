@@ -18,7 +18,7 @@ class Create extends Component
 
     public function mount()
     {
-        $this->batches = Batch::where('status', 'pre-production')->get();
+        $this->batches = Batch::where('status', 'warehouse (pre-production)')->get();
     }
 
     public function store()
