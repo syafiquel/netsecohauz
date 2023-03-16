@@ -49,7 +49,7 @@ class DataTable extends DataTableComponent
                 ->searchable(),
             Column::make('')
                 ->label(
-                    fn($row, Column $column) => "<a href='/batch/$row->id/edit' class='btn btn-primary' role='button'><i class='fa-solid fa-pen-to-square'></i></a>"
+                    fn($row, Column $column) => "<a href='/batch/registration/$row->id/edit' class='btn btn-primary' role='button'><i class='fa-solid fa-pen-to-square'></i></a>"
                 )->html(),
             Column::make('')
                 ->label(

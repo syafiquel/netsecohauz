@@ -26,15 +26,10 @@
                 <a href="{{ route('product.index') }}" class="nav-link"><i class="fa-solid fa-basket-shopping"></i><span>Products</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a href="{{ route('batch.index') }}" class="nav-link"><i class="fa-solid fa-table-cells"></i><span>Incoming Batch</span></a>
+                <a href="{{ route('batch.registration.index') }}" class="nav-link"><i class="fa-solid fa-table-cells"></i><span>Batch Registration</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-industry"></i><span>Batch Production</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('batch.production.summary') }}">Batch Summary</a></li>
-                    <li><a class="nav-link" href="forms-editor.html">Editor</a></li>
-                    <li><a class="nav-link" href="forms-validation.html">Validation</a></li>
-                </ul>
+                <a href="{{ route('batch.production.index') }}" class="nav-link"><i class="fa-solid fa-industry"></i><span>Batch Production</span></a>
             </li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-right-from-bracket"></i><span>Outgoing Batch</span></a>

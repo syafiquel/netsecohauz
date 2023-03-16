@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <div class="section-header">
-            <h1>Batch</h1>
+            <h1>Outgoing Batch Production</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
                 <div class="breadcrumb-item active"><a href="#">Batch</a></div>
@@ -23,11 +23,11 @@
             <div class="card text-center">
                 <div class="card-block pt-5">
                     <div class="card-title">
-                        <h4>Manage Incoming Batch Unit</h4>
+                        <h4>View Batch Summary</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('unit.index') }}"><i class="fa fa-brands fa-unity fa-3x"></i></a>
+                    <a href="{{ route('batch.production.summary') }}"><i class="fa fa-brands fa-unity fa-3x"></i></a>
                 </div>
                 <div class="card-footer">
                 </div>
@@ -35,11 +35,11 @@
             <div class="card text-center">
                 <div class="card-block pt-5">
                     <div class="card-title">
-                        <h4>Manage Incoming Batch Palette</h4>
+                        <h4>Manage Outgoing Palette</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('palette.index') }}"><i class="fa-solid fa-pallet fa-3x"></i></a>
+                    <a href="{{ route('palette.production.index') }}"><i class="fa-solid fa-pallet fa-3x"></i></a>
                 </div>
                 <div class="card-footer">
                 </div>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                <a href="{{ route('bundle.index') }}"><i class="fa-solid fa-boxes-stacked fa-3x"></i></a>
+                <a href="{{ route('batch.production.create') }}"><i class="fa-solid fa-boxes-stacked fa-3x"></i></a>
                 </div>
                 <div class="card-footer">
                 </div>
@@ -61,11 +61,11 @@
             <div class="card text-center">
                 <div class="card-block pt-5">
                     <div class="card-title">
-                        <h4>Manage Incoming Batch</h4>
+                        <h4>Manage Outgoing Batch</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('batch.create') }}"><i class="fa-solid fa-boxes-packing fa-3x"></i></a>
+                    <a href="{{ route('batch.production.create') }}"><i class="fa-solid fa-boxes-packing fa-3x"></i></a>
                 </div>
                 <div class="card-footer">
                 </div>
@@ -75,11 +75,11 @@
             <div class="card text-center">
                 <div class="card-block pt-5">
                     <div class="card-title">
-                        <h4>Manage Incoming Batch Carton</h4>
+                        <h4>Manage Outgoing Batch Carton</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('carton.index') }}"><i class="fa-solid fa-box fa-3x"></i></a>
+                    <a href="{{ route('carton.production.index') }}"><i class="fa-solid fa-box fa-3x"></i></a>
                 </div>
                 <div class="card-footer">
                 </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Batch;
+use App\Models\PaletteIn;
+use App\Models\PaletteOut;
 use App\Models\BatchOperation;
 use Illuminate\Support\Carbon;
 
@@ -104,34 +106,6 @@ class BatchController extends Controller
         return response()->json($batches);
     }
 
-    public function batchScanStart(Request $request)
-    {
-        $param = $request->route('uuid');
-        $batch = Batch::where('uuid', $param)->first();
-        BatchOperation::create([
-                'batch_id' => $batch->id
-        ]);
-        $batch->status = 'on production';
-        $batch->save();
-        return response()->json($batch);
-
-    }
-
-    public function batchScanEnd(Request $request)
-    {
-        $param = $request->route('uuid');
-        $batch = Batch::where('uuid', $param)->first();
-        $batch_operation = BatchOperation::where('batch_id', $batch->id)->first();
-        $batch_operation->updated_at = Carbon::now();
-        $batch_operation->save();
-        $batch->status = 'warehouse (post-production)';
-        $batch->save();
-        return response()->json($batch);
-
-    }
-
-    public function batchProductionSummary()
-    {
-        return view('livewire.production.batch');
-    }
+    
+    
 }

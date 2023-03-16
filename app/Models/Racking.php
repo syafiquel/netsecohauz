@@ -19,7 +19,7 @@ class Racking extends Model
 
     public function palette()
     {
-        return $this->belongsTo(Palette::class);
+        return $this->belongsTo(PaletteIn::class);
     }
 
 }

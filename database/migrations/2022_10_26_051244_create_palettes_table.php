@@ -19,8 +19,11 @@ class CreatePalettesTable extends Migration
             $table->bigInteger('batch_id')->unsigned()->index()->nullable();
             $table->string('name');
             $table->integer('unit_quantity');
+            $table->integer('product_quantity')->nullable();
             $table->string('description');
             $table->string('remark');
+            $table->date('production_in_at')->nullable();
+            $table->date('production_out_at')->nullable();
             $table->timestamps();
         });
     }

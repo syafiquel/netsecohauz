@@ -32,10 +32,10 @@ class DataTable extends DataTableComponent
             //     ->searchable() : ''
             // ,
             Column::make('Unit / Carton')
-                ->label(fn($row) => $row->unit_quantity)
+                ->label(fn($row) => isset($row->batch->carton_quantity) ? $row->unit_quantity : 'N/A')
                 ->searchable(),
             Column::make('Bundle / Carton')
-                ->label(fn($row) => ceil($row->unit_quantity / ($row->batch->unit_quantity / $row->batch->bundle_quantity)))
+                ->label(fn($row) => isset($row->batch->bundle_quantity) ? ceil($row->unit_quantity / ($row->batch->unit_quantity / $row->batch->bundle_quantity)) : 'N/A')
                 ->searchable(),
             Column::make('Batch')
                 ->label(fn($row) => $row->batch->name)

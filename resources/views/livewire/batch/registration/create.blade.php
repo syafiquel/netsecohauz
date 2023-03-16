@@ -70,17 +70,6 @@
                             @endforeach
                         </select>
                     </div>
-                    {{-- @livewire('dynamic-input', ['model' => 'palette', 'label' => 'Batch Palette']) --}}
-
-                    <div class="form-group">
-                        <label>Batch Status</label>        
-                        <select wire:model="status" class="form-control selectric">
-                            <option value="">Select a batch status</option>
-                            @foreach($statuses as $status)
-                            <option value="{{ $status }}">{{ ucfirst($status) }}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
                     <div class="form-group">
                         <label>Description</label>

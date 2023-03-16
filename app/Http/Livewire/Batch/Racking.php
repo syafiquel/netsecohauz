@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Batch;
 
 use App\Models\Racking as Model;
-use App\Models\Palette;
 use App\Models\Batch;
 use Livewire\Component;
 use Illuminate\Support\Carbon;

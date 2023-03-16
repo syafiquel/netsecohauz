@@ -21,7 +21,7 @@
         <livewire:batch.datatable />
 
         <x-slot name="modal">
-            @livewire('batch.create')
+            @livewire('batch.registration.create')
             <x-qrcode></x-qrcode>
         </x-slot>
     </div>

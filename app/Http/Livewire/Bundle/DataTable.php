@@ -26,7 +26,7 @@ class DataTable extends DataTableComponent
             //     ->label(fn($row) => $row->quantity)
             //     ->searchable(),
             Column::make('Unit / Bundle')
-                ->label(fn($row) => $row->unit_quantity)
+                ->label(fn($row) => isset($row->batch->bundle_quantity) ? $row->unit_quantity : 'N/A')
                 ->searchable(),
             Column::make('Batch')
                 ->label(fn($row) => $row->batch->name)

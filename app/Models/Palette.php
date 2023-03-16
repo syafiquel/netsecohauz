@@ -16,7 +16,10 @@ class Palette extends Model
         'description',
         'remark',
         'batch_id',
-        'unit_quantity'
+        'unit_quantity',
+        'product_quantity',
+        'production_in_at',
+        'production_out_at'
     ];
 
     public function batch()

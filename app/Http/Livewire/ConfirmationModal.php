@@ -6,8 +6,8 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Unit;
 use App\Models\Bundle;
-use App\Models\Carton;
-use App\Models\Palette;
+use App\Models\CartonIn;
+use App\Models\PaletteIn;
 use App\Models\Racking;
 use Livewire\Component;
 
@@ -59,16 +59,16 @@ class ConfirmationModal extends Component
                 }
                 break;
             case 'carton':
-                if(Carton::find($data['id'])->exists())
+                if(CartonIn::find($data['id'])->exists())
                 {
-                    $carton = Carton::find($data['id']);
+                    $carton = CartonIn::find($data['id']);
                     $carton->delete();
                 }
                 break;
             case 'palette':
-                if(Palette::find($data['id']))
+                if(PaletteIn::find($data['id']))
                 {
-                    $palette = Palette::find($data['id']);
+                    $palette = PaletteIn::find($data['id']);
                     $palette->delete();
                 }
                 break;

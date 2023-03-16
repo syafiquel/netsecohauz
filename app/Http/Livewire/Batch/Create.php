@@ -18,7 +18,10 @@ class Create extends Component
 
     public $name, $unit_quantity, $description, $remark, $brand_owners, $brand_owner, $selected_brand_owner;
     public $selected_status, $status, $selecteds;
-    public $total_unit_quantity, $unit_per_palette_quantity, $unit_per_carton_quantity, $unit_per_bundle_quantity = 0;
+    public $total_unit_quantity; 
+    public $unit_per_palette_quantity = 0;
+    public $unit_per_carton_quantity = 0;
+    public $unit_per_bundle_quantity = 0;
     protected $listeners = [ 'dynamic-select' => 'dynamicHandler' ];
 
     public $statuses = [
@@ -67,9 +70,9 @@ class Create extends Component
             $batch = Batch::create([
                 'name' => $this->name,
                 'unit_quantity' => $this->total_unit_quantity,
-                'palette_quantity' => ceil($this->total_unit_quantity / $this->unit_per_palette_quantity),
-                'carton_quantity' => $this->total_unit_quantity / $this->unit_per_carton_quantity,
-                'bundle_quantity' => $this->total_unit_quantity / $this->unit_per_bundle_quantity,
+                'palette_quantity' => $this->unit_per_palette_quantity == 0 ? null : ceil($this->total_unit_quantity / $this->unit_per_palette_quantity) ,
+                'carton_quantity' => $this->unit_per_carton_quantity == 0 ? null : ceil($this->total_unit_quantity / $this->unit_per_carton_quantity),
+                'bundle_quantity' => $this->unit_per_bundle_quantity== 0 ? null : ceil($this->total_unit_quantity / $this->unit_per_bundle_quantity),
                 'status' => $this->status,
                 'description' => $this->description,
                 'remark' => $this->remark,
@@ -79,46 +82,52 @@ class Create extends Component
             $batch->no = sprintf('%06d', strval($batch->id));
             $batch->save();
 
-            while(($palette_unit_quantity - $this->unit_per_palette_quantity > 0) || ($palette_unit_quantity > 0))
+            if($this->unit_per_palette_quantity > 0)
             {
-                $palette_counter++;
+                while(($palette_unit_quantity - $this->unit_per_palette_quantity > 0) || ($palette_unit_quantity > 0))
+                {
+                    $palette_counter++;
 
-                if($palette_unit_quantity > $this->unit_per_palette_quantity)
-                    $quantity = $this->unit_per_palette_quantity;
-                else
-                    $quantity = $palette_unit_quantity;
+                    if($palette_unit_quantity > $this->unit_per_palette_quantity)
+                        $quantity = $this->unit_per_palette_quantity;
+                    else
+                        $quantity = $palette_unit_quantity;
 
-                $palette_unit_quantity = $palette_unit_quantity - $this->unit_per_palette_quantity;
+                    $palette_unit_quantity = $palette_unit_quantity - $this->unit_per_palette_quantity;
 
-                $palette = Palette::create([    
-                    'name' => $this->name . '#' . $palette_counter,
-                    'unit_quantity' => $quantity,
-                    'description' => $this->description,
-                    'remark' => $this->remark,
-                    'batch_id' => $batch->id,
-                ]);
+                    $palette = Palette::create([    
+                        'name' => $this->name . '#' . $palette_counter,
+                        'unit_quantity' => $quantity,
+                        'description' => $this->description,
+                        'remark' => $this->remark,
+                        'batch_id' => $batch->id,
+                    ]);
 
+                }
             }
 
-            while(($carton_unit_quantity - $this->unit_per_carton_quantity > 0) || ($carton_unit_quantity > 0))
+            if($this->unit_per_carton_quantity > 0)
             {
-                $carton_counter++;
+                while(($carton_unit_quantity - $this->unit_per_carton_quantity > 0) || ($carton_unit_quantity > 0))
+                {
+                    $carton_counter++;
 
-                if($carton_unit_quantity > $this->unit_per_carton_quantity)
-                    $quantity = $this->unit_per_carton_quantity;
-                else
-                    $quantity = $carton_unit_quantity;
+                    if($carton_unit_quantity > $this->unit_per_carton_quantity)
+                        $quantity = $this->unit_per_carton_quantity;
+                    else
+                        $quantity = $carton_unit_quantity;
 
-                $carton_unit_quantity = $carton_unit_quantity - $this->unit_per_carton_quantity;
+                    $carton_unit_quantity = $carton_unit_quantity - $this->unit_per_carton_quantity;
 
-                $carton = Carton::create([    
-                    'name' => $this->name . '#' . $carton_counter,
-                    'unit_quantity' => $quantity,
-                    'description' => $this->description,
-                    'remark' => $this->remark,
-                    'batch_id' => $batch->id,
-                ]);
+                    $carton = Carton::create([    
+                        'name' => $this->name . '#' . $carton_counter,
+                        'unit_quantity' => $quantity,
+                        'description' => $this->description,
+                        'remark' => $this->remark,
+                        'batch_id' => $batch->id,
+                    ]);
 
+                }
             }
 
             if($this->unit_per_bundle_quantity > 0)
