@@ -78,7 +78,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 
 // Batch API
-Route::get('batches', [App\Http\Controllers\BatchController::class, 'getPreProdAll'])->name('batch.pre-prod.all');
+Route::get('batches', [App\Http\Controllers\Batch\Production\BatchController::class, 'getPreProdAll'])->name('batch.pre-prod.all');
 Route::get('palette/scan/start/{uuid}', [App\Http\Controllers\Palette\Production\PaletteController::class, 'paletteScanStart'])->name('palette.scan.start');
 Route::get('palette/scan/end/{uuid}', [App\Http\Controllers\Palette\Production\PaletteController::class, 'paletteScanEnd'])->name('palette.scan.end');
 Route::get('carton/scan/start/{uuid}', [App\Http\Controllers\Carton\Production\CartonController::class, 'cartonScanStart'])->name('carton.scan.start');

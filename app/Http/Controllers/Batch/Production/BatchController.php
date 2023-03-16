@@ -83,6 +83,13 @@ class BatchController extends Controller
         //
     }
 
+    public function getPreProdAll(Request $request)
+    {
+        $param = $request->route('option');
+        $batches = Batch::select(['name', 'no', 'status', 'image'])->where('status', 'warehouse (pre-production)')->get();
+        return response()->json($batches);
+    }
+
     public function batchProductionSummary()
     {
         return view('livewire.batch.summary.batch');
