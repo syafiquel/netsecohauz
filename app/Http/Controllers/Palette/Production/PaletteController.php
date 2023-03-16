@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\PaletteOut;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Log;
 
 class PaletteController extends Controller
 {
@@ -88,9 +87,7 @@ class PaletteController extends Controller
 
     public function paletteScanStart(Request $request)
     {
-        Log::debug('api requesting');
         $param = $request->route('uuid');
-        Log::debug($param);
         $palette = PaletteOut::where('uuid', $param)->first();
         $palette->production_in_at = Carbon::now();
         $palette->save();

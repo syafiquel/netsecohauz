@@ -42,7 +42,7 @@ class DataTable extends DataTableComponent
                 ->searchable(),
             Column::make('')
                 ->label(
-                    fn($row, Column $column) => "<button class='btn btn-info' wire:click='emitQrCodeEvent()'><i class='fa fa-qrcode'></i></a>"
+                    fn($row, Column $column) => "<button class='btn btn-info' wire:click='emitQrCodeEvent(\"$row->uuid\")'><i class='fa fa-qrcode'></i></a>"
                 )->html(),
         ];
     }
@@ -58,9 +58,9 @@ class DataTable extends DataTableComponent
         $this->emit('open-confirm-modal', $data);
     }
 
-    public function emitQrCodeEvent()
+    public function emitQrCodeEvent($uuid)
     {
-        $this->dispatchBrowserEvent('open-qr-code-modal');
+        $this->dispatchBrowserEvent('open-qr-code-modal', $uuid);
     }
 
     public static function getName()

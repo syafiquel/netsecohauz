@@ -46,13 +46,14 @@
     <script type="text/javascript">
     
         window.addEventListener('open-qr-code-modal', event => {
+            uuid = event.detail;
             $('#modal-qr-code-part').modal('show');
+            var canvas = document.getElementById('canvas');
+            QRCode.toCanvas(document.getElementById('canvas'), uuid, function (error) {
+                if (error) console.error(error)
+            });
         });
 
-        var canvas = document.getElementById('canvas');
-        QRCode.toCanvas(document.getElementById('canvas'), 'sampletext', function (error) {
-            if (error) console.error(error)
-        });
 
         document.getElementById("btnPrint").onclick = function () {
             var img = new Image;
