@@ -40,8 +40,15 @@ class DataTable extends DataTableComponent
             Column::make('Description')
                 ->label(fn($row) => isset($row->description) ? $row->description : 'N/A')
                 ->searchable(),
-                Column::make('Status')
-                ->label(fn($row) => isset($row->production_in_at) && isset($row->production_out_at) ? 'Completed' : 'Pending')
+            Column::make('Status')
+                ->label(function($row) {
+                if(isset($row->production_in_at) && isset($row->production_out_at))
+                        return 'Completed'; 
+                    elseif(isset($row->production_in_at) && !isset($row->production_out_at))
+                        return 'In production';
+                    else
+                        return 'Pending';
+                    })
                 ->searchable(),
             Column::make('Production In Date')
                 ->label(fn($row) => isset($row->production_in_at) ? $row->production_in_at : 'N/A')

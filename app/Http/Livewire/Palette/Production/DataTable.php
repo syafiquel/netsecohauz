@@ -32,7 +32,14 @@ class DataTable extends DataTableComponent
                 ->label(fn($row) => $row->batch->name)
                 ->searchable(),
             Column::make('Status')
-                ->label(fn($row) => isset($row->production_in_at) && isset($row->production_out_at) ? 'Completed' : 'Pending')
+                ->label(function($row) { 
+                    if(isset($row->production_in_at) && isset($row->production_out_at))
+                        return 'Completed'; 
+                    elseif(isset($row->production_in_at) && !isset($row->production_out_at))
+                        return 'In production';
+                    else
+                        return 'Pending';
+                })
                 ->searchable(),
             Column::make('Production In Date')
                 ->label(fn($row) => isset($row->production_in_at) ? $row->production_in_at : 'N/A')

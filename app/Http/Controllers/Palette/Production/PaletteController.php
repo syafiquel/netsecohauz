@@ -91,7 +91,7 @@ class PaletteController extends Controller
         $palette = PaletteOut::where('uuid', $param)->first();
         $palette->production_in_at = Carbon::now();
         $palette->save();
-        $palette->batch->status = 'on production';
+        $palette->batch->status = 'in production';
         $palette->batch->production_start_at = Carbon::now();
         $palette->batch->save();
         // BatchOperation::create([

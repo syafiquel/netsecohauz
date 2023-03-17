@@ -84,10 +84,13 @@ class DataTable extends DataTableComponent
             //     ->label(fn($row) => $row->brand_owner->name)
             //     ->searchable(),
             Column::make('Status')
-                ->label(fn($row) => $row->status_in)
+                ->label(fn($row) => $row->status)
                 ->searchable(),
-            Column::make('Production Date')
-                ->label(fn($row) => $row->production_at)
+            Column::make('Production Start Date')
+                ->label(fn($row) => $row->production_start_at)
+                ->searchable(),
+            Column::make('Production End Date')
+                ->label(fn($row) => $row->production_end_at)
                 ->searchable(),
             // Column::make('Description')
             //     ->label(fn($row) => $row->description)
